@@ -9,23 +9,16 @@ Gem::Specification.new do |spec|
   spec.version     = Kamigo::VERSION
   spec.authors     = ["etrex"]
   spec.email       = ["et284vu065k3@gmail.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of Kamigo."
-  spec.description = "TODO: Description of Kamigo."
+  spec.homepage    = "https://github.com/etrex/kamigo"
+  spec.summary     = "a chatbot framework based on rails"
+  spec.description = "a chatbot framework based on rails"
   spec.license     = "MIT"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "rails", "~> 5.2.3"
-  spec.add_dependency ""
+  spec.add_dependency "kamiliff", "~> 0.11.0"
+  spec.add_dependency "kamiflex", "~> 0.8.0"
+  spec.add_dependency "line-bot-api", "~> 1.5"
   spec.add_development_dependency "sqlite3"
 end

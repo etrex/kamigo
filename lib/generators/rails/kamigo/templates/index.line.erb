@@ -1,0 +1,26 @@
+<%%= raw(Kamiflex.build(self) do
+  bubble do
+    body do
+      horizontal_box do
+        text "🍔", flex: 0, action: message_action("/")
+        text "<%= class_name.pluralize %>", weight: "bold", margin: "sm"
+        text "new", align: "end", action: uri_action(liff_path(path: <%= "new_#{singular_route_name}_path" %>)), color: "#0000ee"
+      end
+      separator
+      if @<%= plural_table_name %>.present?
+        vertical_box margin: "lg" do
+          horizontal_box margin: "lg" do
+            text "<%= attributes&.first&.human_name || "Id" %>", weight: "bold"
+            text "action", align: "end"
+          end
+          horizontal_box @<%= plural_table_name %>, margin: "lg" do |<%= singular_table_name %>|
+            text <%= singular_table_name %>.<%= attributes&.first&.column_name || "id" %>, action: message_action("GET <%= route_url %>/#{<%= singular_table_name %>.id}")
+            text "❌", align: "end", action: message_action("DELETE <%= route_url %>/#{<%= singular_table_name %>.id}")
+          end
+        end
+      else
+        text "沒有目前內容", margin: "lg"
+      end
+    end
+  end
+end )%>

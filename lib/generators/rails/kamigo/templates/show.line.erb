@@ -1,0 +1,25 @@
+<%%= raw(Kamiflex.build(self) do
+  bubble do
+    body do
+      horizontal_box do
+        text "🍔", flex: 0, action: message_action("/")
+        text "Show <%= class_name %>", weight: "bold", margin: "sm"
+        text "edit", align: "end", action: uri_action(liff_path(path: <%= "edit_#{singular_route_name}_path(@#{singular_table_name})" %> )), color: "#0000ee"
+      end
+      separator
+
+      horizontal_box margin: "md" do
+        vertical_box do
+<% attributes_names.each do |attribute_name| -%>
+          text "<%= attribute_name %>", weight: "bold", margin: "xs"
+<% end -%>
+        end
+        vertical_box do
+<% attributes_names.each do |attribute_name| -%>
+          text @<%= singular_table_name %>.<%= attribute_name %>.blank? ? "-" : @<%= singular_table_name %>.<%= attribute_name %>.to_s, align: "end", margin: "xs"
+<% end -%>
+        end
+      end
+    end
+  end
+end )%>
