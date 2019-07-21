@@ -1,3 +1,5 @@
+# Kamigo 簡介
+
 Kamigo 是一個基於 Rails 的 Chatbot MVC Framework。
 
 Kamigo 讓你開發 Chatbot 就跟開發網站一樣容易，甚至可以同時開發網站以及 Chatbot 介面，共用 Controller 和 Model，只需要針對 Chatbot 實作 View。
