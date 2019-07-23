@@ -54,6 +54,15 @@ LIFF_FULL=這裡填入你的 LIFF_FULL
 
 而 LIFF_COMPACT、LIFF_TALL 和 LIFF_FULL 你必須到 LINE 的後台中的 Liff 分頁去新增，詳細說明請參考 [kamiliff_demo](https://github.com/etrex/kamiliff_demo)。
 
+# 設定聊天機器人 webhook url
+
+請將以下網址填入 LINE Bot 的 webhook url 欄位中：
+
+```
+https://你的網域/line
+```
+
+
 至此串接完成。
 
 # 實際使用
