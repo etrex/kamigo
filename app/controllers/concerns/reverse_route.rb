@@ -1,5 +1,7 @@
 module ReverseRoute
   def reserve_route(path, http_method: "GET", request_params: nil, format: nil)
+    path = "/#{path}" unless path.start_with? "/"
+
     request.request_method = http_method
     request.path_info = path
     request.format = format if format.present?

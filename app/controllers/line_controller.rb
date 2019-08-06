@@ -15,7 +15,6 @@ class LineController < ApplicationController
 
   def process_event(event)
     reply_token = event['replyToken']
-    event
     http_method, path, request_params = language_understanding(event.message['text'])
     inject_event(event, to: request_params)
     output = reserve_route(path, http_method: http_method, request_params: request_params, format: :line)

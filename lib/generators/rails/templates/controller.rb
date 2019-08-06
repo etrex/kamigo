@@ -53,12 +53,12 @@ class <%= controller_class_name %>Controller < ApplicationController
       if @<%= orm_instance.update("#{singular_table_name}_params") %>
         @<%= plural_table_name %> = <%= orm_class.all(class_name) %>
         format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully updated.'" %> }
-        format.json { render :show, status: :ok, location: <%= "@#{singular_table_name}" %> }
+        format.json { render :show, status: :ok, location: @<%= singular_table_name %> }
         format.line { render :index }
       else
         format.html { render :edit }
-        format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
-        format.line { render json: flex_text(@todo.errors.to_s) }
+        format.json { render json: @<%= orm_instance.errors %>, status: :unprocessable_entity }
+        format.line { render json: flex_text(@<%= orm_instance.errors %>.to_s) }
       end
     end
   end
