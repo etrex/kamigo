@@ -26,7 +26,7 @@ end
 ```ruby
 {
   "type": "text",
-  "text": "hello, world"
+  "text": "Hello, world"
 }
 ```
 
@@ -35,7 +35,7 @@ end
 ```ruby
 <%= raw {
   type: "text",
-  text: "hello, world"
+  text: "Hello, world"
 }.to_json %>
 ```
 
@@ -43,14 +43,36 @@ end
 
 ```ruby
 json.type "text"
-json.text "hello, world"
+json.text "Hello, world"
 ```
 
-最終都會產生出一樣的 json，也就是 [LINE Messaging API] 所要求的格式：
+最終都會產生出一樣的 json，也就是 [LINE Messaging API](https://developers.line.biz/en/reference/messaging-api/#text-message) 所要求的格式：
 
 ```ruby
 {
   "type": "text",
-  "text": "hello, world"
+  "text": "Hello, world"
 }
 ```
+
+# 使用 Flex Message
+
+LINE Messaging API 提供了一種訊息格式，稱為 [Flex Message](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/)。
+
+你可以使用 [Kamiflex](https://github.com/etrex/kamiflex) 來快速生成 Flex Message。
+
+目前在 view 當中使用 Kamiflex 的方法是使用 erb，比方說在 `app/views/home/index.line.erb` 輸入以下程式碼：
+
+```
+<%= raw(Kamiflex.build(self) do
+  bubble do
+    body do
+      horizontal_box do
+        text "Hello, world"
+      end
+    end
+  end
+end )%>
+```
+
+更多的 [Kamiflex 使用說明](https://github.com/etrex/kamiflex)
