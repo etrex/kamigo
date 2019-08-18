@@ -71,6 +71,8 @@ Kamigo 預設使用基本的語意理解模型，會將使用者輸入視為在�
 只要和你的聊天機器人說 `/`，就能看見首頁的樣子。
 
 # 使用 kamigo 製作的聊天機器人
+- [kamigo demo](https://github.com/etrex/kamigo_demo)
+  ![](https://qr-official.line.me/M/q1CAuLSnNo.png)
 - [健身紀錄機器人: Muscle-Man](https://github.com/louis70109/muscle_man)
   ![](https://camo.githubusercontent.com/c0d2233e3182c822ffc0816fe0cbb5610fe67914/68747470733a2f2f692e696d6775722e636f6d2f4f7930423257326d2e706e67)
 
