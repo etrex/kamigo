@@ -1,3 +1,5 @@
+require 'uri'
+
 class LineController < ApplicationController
   include ReverseRoute
   protect_from_forgery with: :null_session
@@ -17,6 +19,7 @@ class LineController < ApplicationController
     reply_token = event['replyToken']
     http_method, path, request_params = language_understanding(event.message['text'])
     inject_event(event, to: request_params)
+    encoded_path = URI.encode(path)
     output = reserve_route(path, http_method: http_method, request_params: request_params, format: :line)
     response = client.reply_message(reply_token, JSON.parse(output))
     puts response.body
