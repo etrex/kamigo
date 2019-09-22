@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", ">= 5.2.3"
   spec.add_dependency "kamiliff", ">= 0.12.0"
-  spec.add_dependency "kamiflex", ">= 0.10.0"
+  spec.add_dependency "kamiflex", ">= 0.11.0"
   spec.add_dependency "line-bot-api", ">= 1.5"
   spec.add_development_dependency "sqlite3"
 end
