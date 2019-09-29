@@ -8,6 +8,15 @@ module Kamigo
       attr_accessor :source_group_id
       attr_accessor :source_user_id
       attr_accessor :payload
+
+      def platform_params
+        {
+          platform_type: platform_type,
+          source_type: source_type,
+          source_group_id: source_group_id,
+          source_user_id: source_user_id
+        }
+      end
     end
   end
 end

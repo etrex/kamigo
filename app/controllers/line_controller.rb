@@ -18,6 +18,7 @@ class LineController < ApplicationController
   def process_event(event)
     http_method, path, request_params = language_understanding(event.message)
     encoded_path = URI.encode(path)
+    request_params = event.platform_params.merge(request_params)
     output = reserve_route(encoded_path, http_method: http_method, request_params: request_params, format: :line)
     responser = Kamigo::EventResponsers::LineEventResponser.new
     response =  responser.response_event(event, output)

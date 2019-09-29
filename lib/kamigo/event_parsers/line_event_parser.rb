@@ -15,7 +15,6 @@ module Kamigo
         payload = JSON.parse(event.to_json, symbolize_names: true)[:src]
         line_event = Kamigo::Events::LineEvent.new
         line_event.payload = payload
-        line_event.platform_type = 'line'
         line_event.reply_token = event['replyToken']
         line_event.source_type = payload.dig(:source, :type)
         line_event.source_group_id = payload.dig(:source, :groupId) || payload.dig(:source, :roomId) || payload.dig(:source, :userId)
