@@ -12,19 +12,23 @@ class KamigoController < ApplicationController
     return nil if resource.errors.empty?
 
     error = resource.errors.first
-
+    resource_name = resource.class.to_s.downcase
     Kamiform.create(
       platform_type: params[:platform_type],
       source_group_id: params[:source_group_id],
       http_method: http_method,
       path: path,
       params: params,
-      field: "#{resource.class.to_s.downcase}.#{error[0]}"
+      field: "#{resource_name}.#{error[0]}"
     )
 
-    {
-      type: 'text',
-      text: error[1]
-    }
+    begin
+      render "#{resource_name.pluralize}/kamiform/#{error[0]}"
+    rescue StandardError
+      render json: {
+        type: 'text',
+        text: error[1]
+      }
+    end
   end
 end

@@ -39,6 +39,7 @@ class LineController < ApplicationController
     rescue StandardError
       return [nil, nil, nil]
     end
+
     form = Kamiform.find_by(
       platform_type: event.platform_type,
       source_group_id: event.source_group_id
