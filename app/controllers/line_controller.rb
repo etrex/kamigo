@@ -16,7 +16,8 @@ class LineController < ApplicationController
   private
 
   def process_event(event)
-    http_method, path, request_params = language_understanding(event.message)
+    http_method, path, request_params = slot_filling(event)
+    http_method, path, request_params = language_understanding(event.message) if http_method.nil?
     encoded_path = URI.encode(path)
     request_params = event.platform_params.merge(request_params)
     output = reserve_route(encoded_path, http_method: http_method, request_params: request_params, format: :line)
@@ -30,6 +31,33 @@ class LineController < ApplicationController
       type: "text",
       text: "404 not found"
     })
+  end
+
+  def slot_filling(event)
+    begin
+      Kamiform
+    rescue StandardError
+      return [nil, nil, nil]
+    end
+    form = Kamiform.find_by(
+      platform_type: event.platform_type,
+      source_group_id: event.source_group_id
+    )
+    return [nil, nil, nil] if form.nil?
+
+    http_method = form.http_method
+    path = form.path
+    request_params = form.params
+
+    # fill
+    if form.field['.'].nil?
+      request_params[form.field] = event.message
+    else
+      *head, tail = form.field.split('.')
+      request_params.dig(*head)[tail] = event.message
+    end
+    form.destroy
+    [http_method.upcase, path, request_params]
   end
 
   def language_understanding(text)
