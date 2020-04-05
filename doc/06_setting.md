@@ -66,7 +66,6 @@ LIFF_TALL=https://liff.line.me/{FOR_TALL_LIFF_ID}
 LIFF_FULL=https://liff.line.me/{FOR_FULL_LIFF_ID}
 ```
 
-<!-- 考慮一下是否要移到 04_view.md -->
 ## 如何更換 LIFF Size？
 使用 `liff_path` 方法時，新增指定參數 `liff_size`：
 
