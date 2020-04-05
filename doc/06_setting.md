@@ -65,12 +65,3 @@ LIFF_COMPACT=https://liff.line.me/{FOR_COMPACT_LIFF_ID}
 LIFF_TALL=https://liff.line.me/{FOR_TALL_LIFF_ID}
 LIFF_FULL=https://liff.line.me/{FOR_FULL_LIFF_ID}
 ```
-
-## 如何更換 LIFF Size？
-使用 `liff_path` 方法時，新增指定參數 `liff_size`：
-
-```ruby
-<%= liff_path(path: new_todo_path, liff_size: :compact) %>
-<%= liff_path(path: new_todo_path, liff_size: :tall) %>
-<%= liff_path(path: new_todo_path, liff_size: :full) %>
-```

@@ -76,3 +76,13 @@ end )%>
 ```
 
 更多的 [Kamiflex 使用說明](https://github.com/etrex/kamiflex)
+
+# 使用 LIFF
+## 更換 LIFF Size
+使用 `liff_path` 方法時，新增指定參數 `liff_size`：
+
+```ruby
+<%= liff_path(path: new_todo_path, liff_size: :compact) %>
+<%= liff_path(path: new_todo_path, liff_size: :tall) %>
+<%= liff_path(path: new_todo_path, liff_size: :full) %>
+```
