@@ -63,6 +63,7 @@ LIFF_FULL=這裡填入你的 FULL_LIFF_URL
 - `LINE_CHANNEL_ACCESS_TOKEN` 可以在 Messaging API 後台的 Messaging API 分頁中找到。
 - `COMPACT_LIFF_URL`、`TALL_LIFF_URL` 和 `FULL_LIFF_URL` 需要到 LINE 後台的 LIFF 分頁新增後，即可獲得一組 LIFF URL。
 
+Kamigo 預設的 LIFF Size 為 Compact，你也可以只新增 Compact LIFF URL。
 <!-- 這邊要修改 kamiliff_demo, kamiliff，並新增一份中文版在 kamigo -->
 詳細的 LIFF 設定說明可以服用此帖 [LIFF 設定 QA](/doc/06_setting.md#LIFF-設定-QA)。
 
