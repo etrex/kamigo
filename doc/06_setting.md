@@ -21,7 +21,7 @@ https://{NGROK_HTTPS_DOMAIN}/line
 6. 點擊 `Verify` 按鈕發送一個 POST Request 確認設定是否成功。
 
 ## 重開 ngrok 後，Webhook URL 就失效了？
-若你重新執行 ngrok，則 ngrok 會產生新的網域，你需變更 LINE Bot 的 Webhook URL 和 LIFF app 的 Endpoint URL 為新的網域。
+若你重新執行 ngrok，則 ngrok 會產生新的網域，你需要變更 LINE Bot 的 Webhook URL 和 LIFF app 的 Endpoint URL 為新的網域。
 
 ## 完成串接流程，但 Kamigo 沒有反應？
 若 Webhook URL 和 `.env` 檔都設定完，Kamigo 仍沒有反應，請確認以下兩個設定：
@@ -66,8 +66,9 @@ LIFF_TALL=https://liff.line.me/{FOR_TALL_LIFF_ID}
 LIFF_FULL=https://liff.line.me/{FOR_FULL_LIFF_ID}
 ```
 
+<!-- 考慮一下是否要移到 04_view.md -->
 ## 如何更換 LIFF Size？
-可以，只需要在 `liff_path` 方法新增指定參數 `liff_size`：
+使用 `liff_path` 方法時，新增指定參數 `liff_size`：
 
 ```ruby
 <%= liff_path(path: new_todo_path, liff_size: :compact) %>
