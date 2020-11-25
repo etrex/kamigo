@@ -84,7 +84,7 @@ LIFF_FULL=https://liff.line.me/{FOR_FULL_LIFF_ID}
 
 ## LIFF Mode 設定
 
-關於 [Behaviors from accessing the LIFF URL to opening the LIFF app](https://developers.line.biz/en/docs/liff/opening-liff-app/#redirect-flow)，也就是 LIFF Mode，在 kamigo 當中，預設採用 Concatenate Mode，如果你想要使用 Replace Mode（(即將在 2021/3/1 被移除)[[https://developers.line.biz/en/news/2020/11/20/discontinue-replace-mode-announcement/]）的話，可以透過指定環境變數(不限大小寫）來使用。
+關於 [Behaviors from accessing the LIFF URL to opening the LIFF app](https://developers.line.biz/en/docs/liff/opening-liff-app/#redirect-flow)，也就是 LIFF Mode，在 kamigo 當中，預設採用 Concatenate Mode，如果你想要使用 Replace Mode（[即將在 2021/3/1 被移除](https://developers.line.biz/en/news/2020/11/20/discontinue-replace-mode-announcement/)）的話，可以透過指定環境變數(不限大小寫）來使用。
 
 ```
 LIFF_MODE=replace
