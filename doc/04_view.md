@@ -21,7 +21,9 @@ end
 
 即表示你應該要在 `app/views/home/index.line` 或者 `app/views/home/index.line.erb` 或者 `app/views/home/index.line.jbuilder` 來寫你的回覆訊息。
 
-比方說，你可以在 `app/views/home/index.line` 輸入以下訊息：
+如果你不想回覆訊息的話，你可以建立一個空的 `app/views/home/index.line` 或 `app/views/home/index.line.erb` 或 `app/views/home/index.line.jbuilder` 來避免回覆訊息。
+
+你可以在 `app/views/home/index.line` 輸入以下訊息：
 
 ```ruby
 {
