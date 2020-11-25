@@ -1,6 +1,6 @@
 # Controller 的使用說明
 
-## Params
+## 可以在 Controller 取得的重要參數
 
 在 controller 當中你可以取得幾個重要的 params:
 
@@ -76,7 +76,7 @@ render json: {}
 render json: { type:'text', text:'hello kamigo' }
 ```
 
-# 使用 Flex Message
+## 使用 Flex Message
 
 LINE Messaging API 提供了一種訊息格式，稱為 [Flex Message](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/)。
 
