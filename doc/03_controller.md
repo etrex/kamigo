@@ -75,3 +75,24 @@ render json: {}
 ```ruby
 render json: { type:'text', text:'hello kamigo' }
 ```
+
+# 使用 Flex Message
+
+LINE Messaging API 提供了一種訊息格式，稱為 [Flex Message](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/)。
+
+你可以使用 [Kamiflex](https://github.com/etrex/kamiflex) 來快速生成 Flex Message。
+
+目前在 controller 當中使用 Kamiflex 的方法如下：
+
+```
+flex_message = Kamiflex.build(self) do
+  bubble do
+    body do
+      text "Hello, world"
+    end
+  end
+end
+render json: flex_message
+```
+
+更多的 [Kamiflex 使用說明](https://github.com/etrex/kamiflex)
