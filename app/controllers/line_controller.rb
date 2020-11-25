@@ -23,7 +23,7 @@ class LineController < ApplicationController
     output = reserve_route(encoded_path, http_method: http_method, request_params: request_params, format: :line)
     responser = Kamigo::EventResponsers::LineEventResponser.new
     response =  responser.response_event(event, output)
-    puts response.body
+    puts response&.body
   rescue NoMethodError => e
     puts e.full_message
     responser = Kamigo::EventResponsers::LineEventResponser.new
