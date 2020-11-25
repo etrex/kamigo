@@ -1,8 +1,10 @@
 # Controller 的使用說明
 
+## Params
+
 在 controller 當中你可以取得幾個重要的 params:
 
-## platform_type
+### platform_type
 
 platform_type 表示目前的 Request 是來自於哪一個通訊軟體。
 
@@ -14,7 +16,7 @@ Kamigo 目前僅支援 LINE，因此 platform_type 的值會是 "line"。
 params[:platform_type]
 ```
 
-## source_type
+### source_type
 
 source_type 表示目前的 Request 是來自於那一種對話框，其可能的值為 "user"、"room"、"group"。
 
@@ -24,7 +26,7 @@ source_type 表示目前的 Request 是來自於那一種對話框，其可能�
 params[:source_type]
 ```
 
-## source_group_id
+### source_group_id
 
 source_group_id 表示目前 Request 是來自於哪一個對話框。
 
@@ -38,7 +40,7 @@ source_group_id 表示目前 Request 是來自於哪一個對話框。
 params[:source_group_id]
 ```
 
-## source_user_id
+### source_user_id
 
 source_user_id 表示目前 Request 是來自於哪一個使用者。
 
@@ -55,3 +57,21 @@ params[:source_user_id]
 ## 身分驗證
 
 你可以假設 source_group_id 以及 source_user_id 是秘密資訊，以 source_group_id 和 source_user_id 來識別對話框以及用戶。
+
+## 在 Controller 回覆訊息
+
+如果想要不回覆訊息的話：
+
+```ruby
+head :ok
+```
+
+```ruby
+render json: {}
+```
+
+如果想要回覆訊息：
+
+```ruby
+render json: { type:'text', text:'hello kamigo' }
+```
