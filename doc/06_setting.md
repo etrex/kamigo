@@ -29,6 +29,22 @@ https://{NGROK_HTTPS_DOMAIN}/line
 - 確認你的網域是否正確。
 - 確認 `Use webhook` 是否為開啟狀態。
 
+## Rails 6 注意事項
+
+若使用 ngrok 在本機開發時，需要在 `config/application.rb` 加入以下程式碼：
+
+```ruby
+...
+module KamigoDemo
+  class Application < Rails::Application
+    ...
+    config.hosts << "你的亂碼.ngrok.io"
+  end
+end
+```
+
+才能正常連線。
+
 # LIFF 設定 QA
 ## 如何新增 LIFF？
 由於 LIFF v2 改善，LINE 官方在 2020/02/05 [發布通知](https://developers.line.biz/zh-hant/news/2020/02/05/liff-channel-type/)，日後新增 LIFF 需到 LINE Login 的 LIFF 分頁新增，原先在 Messaging API 新增的 LIFF 還能繼續使用。
@@ -65,3 +81,12 @@ LIFF_COMPACT=https://liff.line.me/{FOR_COMPACT_LIFF_ID}
 LIFF_TALL=https://liff.line.me/{FOR_TALL_LIFF_ID}
 LIFF_FULL=https://liff.line.me/{FOR_FULL_LIFF_ID}
 ```
+
+## LIFF Mode 設定
+
+關於 [Behaviors from accessing the LIFF URL to opening the LIFF app](https://developers.line.biz/en/docs/liff/opening-liff-app/#redirect-flow)，也就是 LIFF Mode，在 kamigo 當中，預設採用 Concatenate Mode，如果你想要使用 Replace Mode（(即將在 2021/3/1 被移除)[[https://developers.line.biz/en/news/2020/11/20/discontinue-replace-mode-announcement/]）的話，可以透過指定環境變數(不限大小寫）來使用。
+
+```
+LIFF_MODE=replace
+```
+

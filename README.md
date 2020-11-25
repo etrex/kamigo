@@ -32,12 +32,52 @@ root to: "todos#index"
 ```
 
 # 安裝 js 套件
-<!-- TODO: 待卡米修改完 Kamiliff 後，需新增不同使用方式的說明 -->
-在 `app/assets/javascripts/application.js` 當中加入一行程式碼：
+
+若使用 Asset Pipeline（Rails 5），請在 `app/assets/javascripts/application.js` 當中
+
+加入以下程式碼：
 
 ```
 //= require kamiliff
 ```
+
+或者加入以下程式碼：
+
+```
+/* kamiliff default behavior */
+window.addEventListener("liff_ready", function(event){
+  register_kamiliff_submit();
+});
+
+window.addEventListener("liff_submit", function(event){
+  var json = JSON.stringify(event.detail.data);
+  var url = event.detail.url;
+  var method = event.detail.method;
+  var request_text = method + " " + url + "\n" + json;
+  liff_send_text_message(request_text);
+});
+```
+
+若使用 Webpacker（Rails 6），請在 `app/javascript/packs/application.js` 當中
+
+加入以下程式碼：
+
+```
+/* kamiliff default behavior */
+window.addEventListener("liff_ready", function(event){
+  register_kamiliff_submit();
+});
+
+window.addEventListener("liff_submit", function(event){
+  var json = JSON.stringify(event.detail.data);
+  var url = event.detail.url;
+  var method = event.detail.method;
+  var request_text = method + " " + url + "\n" + json;
+  liff_send_text_message(request_text);
+});
+```
+
+這會影響 LINE Bot 在 LIFF 送出表單時的行為。
 
 # 設定聊天機器人 Webhook URL
 本文假設你已經有一個自己的聊天機器人，請將以下網址填入 LINE Bot 的 Webhook URL 欄位中：
@@ -67,6 +107,22 @@ Kamigo 預設的 LIFF Size 為 Compact，你也可以只新增 Compact LIFF URL�
 詳細的 LIFF 設定說明可以服用此帖 [LIFF 設定 QA](/doc/06_setting.md#LIFF-設定-QA)。
 
 至此串接完成。
+
+# Rails 6 注意事項
+
+若使用 ngrok 在本機開發時，需要在 `config/application.rb` 加入以下程式碼：
+
+```ruby
+...
+module KamigoDemo
+  class Application < Rails::Application
+    ...
+    config.hosts << "你的亂碼.ngrok.io"
+  end
+end
+```
+
+才能正常連線。
 
 # 實際使用
 Kamigo 預設使用基本的語意理解模型，會將使用者輸入視為在瀏覽器網址上輸入文字，並且以 LINE Flex Message 來顯示對應的結果。
