@@ -17,7 +17,7 @@ module Kamigo
         line_event = Kamigo::Events::LineEvent.new
         line_event.payload = payload
         line_event.reply_token = event['replyToken']
-        line_event.source_profile = JSON.parse(response.body)
+        line_event.profile = JSON.parse(response.body)
         line_event.source_type = payload.dig(:source, :type)
         line_event.source_group_id = payload.dig(:source, :groupId) || payload.dig(:source, :roomId) || payload.dig(:source, :userId)
         line_event.source_user_id = payload.dig(:source, :userId) || payload.dig(:source, :groupId) || payload.dig(:source, :roomId)
