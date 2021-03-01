@@ -18,6 +18,8 @@ cd kamigo_demo
 # 安裝套件
 bundle add kamigo
 bundle add dotenv-rails
+# 建立設定檔
+rails g kamigo:install
 # 新增 resource controller
 rails g scaffold todo name desc
 rails db:create
