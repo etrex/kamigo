@@ -8,6 +8,8 @@ require "kamigo/events/line_event"
 require "kamigo/event_parsers/line_event_parser"
 require "kamigo/event_responsers/line_event_responser"
 require "kamigo/event_processors/rails_router_processor"
+require "kamigo/request_handlers/line_request_handler"
+
 module Kamigo
   mattr_accessor :line_default_message
   @@line_default_message = {
