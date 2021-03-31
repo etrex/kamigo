@@ -149,9 +149,15 @@ Kamigo 預設使用基本的語意理解模型，會將使用者輸入視為在�
 
 # 計畫
 - 提供多種語意理解模型串接
+  - DialogFlow
+  - LUIS
 - 網站使用者與聊天機器人使用者綁定
-- 支援 Telegram
-- 支援 Facebook Messenger
+  - Devise
+- Log / 錯誤追蹤
+- 支援其他平台
+  - Telegram
+  - Facebook Messenger
+  - Slack
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
