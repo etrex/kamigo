@@ -12,7 +12,8 @@ module Kamigo
       end
 
       def parse(event)
-        payload = JSON.parse(event.to_json, symbolize_names: true)[:src]
+        event_hash = JSON.parse(event.to_json, symbolize_names: true)
+        payload = event_hash[:src] || event_hash
         response = client.get_profile(payload[:source][:userId])
         line_event = Kamigo::Events::LineEvent.new
         line_event.payload = payload
