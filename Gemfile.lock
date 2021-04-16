@@ -77,7 +77,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    json (2.2.0)
+    json (2.5.1)
     kamiflex (0.11.4)
       json
     kamiliff (0.26.0)
