@@ -1,3 +1,7 @@
+# 詳細的說明文件
+
+[Kamigo 詳細說明](https://etrex.tw/kamigo/)
+
 # Kamigo 簡介
 Kamigo 是一個基於 Rails 的 Chatbot MVC Framework。
 
@@ -138,15 +142,6 @@ Kamigo 預設使用基本的語意理解模型，會將使用者輸入視為在�
   <p><img width="100" height="100" src="https://camo.githubusercontent.com/b8c51b15b20b159d356245277d079c04482acc01/68747470733a2f2f692e696d6775722e636f6d2f7534547675676e2e706e67"></p>
 - 守護寵物機器人
   <p><img width="100" height="100" src="/doc/images/pet_loved_qrcode.png"></p>
-
-# 詳細的說明文件
-- [Kamigo 架構概觀](/doc/01_intro.md)
-- [Route 的使用說明](/doc/02_route.md)
-- [Controller 的使用說明](/doc/03_controller.md)
-  - [可以在 Controller 取得的重要參數](/doc/03_controller.md#可以在-controller-取得的重要參數)
-- [View 的使用說明](/doc/04_view.md)
-- [Form 的使用說明](/doc/05_form.md)
-- [Kamigo 相關設定與 QA](/doc/06_setting.md)
 
 # 計畫
 - 提供多種語意理解模型串接
