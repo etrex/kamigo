@@ -143,6 +143,7 @@ Kamigo 預設使用基本的語意理解模型，會將使用者輸入視為在�
 - [Kamigo 架構概觀](/doc/01_intro.md)
 - [Route 的使用說明](/doc/02_route.md)
 - [Controller 的使用說明](/doc/03_controller.md)
+  - [可以在 Controller 取得的重要參數](/doc/03_controller.md#可以在-controller-取得的重要參數)
 - [View 的使用說明](/doc/04_view.md)
 - [Form 的使用說明](/doc/05_form.md)
 - [Kamigo 相關設定與 QA](/doc/06_setting.md)
