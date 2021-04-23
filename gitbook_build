@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+rm -rf docs
+
+cd gitbook_src
+gitbook build
+cd ..
+
+mv gitbook_src/_book docs
