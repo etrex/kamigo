@@ -13,10 +13,13 @@ module Kamigo
       def platform_params
         {
           platform_type: platform_type,
+          message: message,
+          message_type: message_type,
           source_type: source_type,
           source_group_id: source_group_id,
           source_user_id: source_user_id,
-          profile: profile
+          profile: profile,
+          payload: payload
         }
       end
     end
