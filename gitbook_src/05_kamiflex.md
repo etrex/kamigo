@@ -1,6 +1,6 @@
 # 概觀
 Kamiflex讓你以程式碼的方式取代Flex Messages JSON，達到方便、簡潔、易維護易擴展的目的。Kamiflex目前僅支援Line平台上的Flex Message，Line Flex Message的架構如下：
-    
+
 ```
 ├──Flex Message Header
     |
@@ -14,7 +14,7 @@ Kamiflex讓你以程式碼的方式取代Flex Messages JSON，達到方便、簡
 以kamigo的預設index.line.erb為例，其轉換為Json的關係圖如下：
 
 
-<img src="https://i.imgur.com/VqGf3um.jpg" alt= "index.line.erb的Json關係圖" width= "200">
+<img src="https://i.imgur.com/VqGf3um.jpg" alt= "index.line.erb的Json關係圖" width= "400">
 
 上圖數字代表意義為：
 1. Flex Message Header
@@ -76,11 +76,16 @@ kamiflex會將該程式碼轉換為Json，`{...}`為block，可以在其中放�
             ...
         }
         ```
+
 # 核心元件
 核心元件需被寫在Flex Message Header的block之中。
 - ### bubble
     - 說明
         此元件為Flex Message最基礎之核心元件。
+        ![](https://developers.line.biz/assets/img/overviewSample.772a618f.png) <br/>
+        詳細說明請參考以下連結：<br/>
+        [LINE Flex Message 關於 Bubble 的說明文件](https://developers.line.biz/en/docs/messaging-api/flex-message-elements/#bubble) <br/>
+        [LINE Flex Message 關於 Bubble 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#bubble)
     - 使用範例
         ```
         Kamiflex.build(self) do
@@ -89,6 +94,15 @@ kamiflex會將該程式碼轉換為Json，`{...}`為block，可以在其中放�
             end
         end
         ```
+        修改 size 的寫法：
+        ```
+        Kamiflex.build(self) do
+            bubble size: :giga do
+                ...
+            end
+        end
+        ```
+
 - ### bubbles
     - 說明
         此元件主要運用在`carousel`之中，達成橫向多筆Flex Message，若不使用此核心元件，亦可使用Ruby原生的`#each`搭配`bubble`達到相同功能。
@@ -151,7 +165,7 @@ kamiflex會將該程式碼轉換為Json，`{...}`為block，可以在其中放�
         end
         ```
     > hero也可以更改`type:"image"`為`type:"box"`，但這將與body用途重複，因此這邊就不進一步介紹
-    
+
 - ### body
     - 說明
         呈現在Flex Message中間的位置，一般用於表達內文。
