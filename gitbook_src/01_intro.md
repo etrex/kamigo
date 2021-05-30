@@ -59,7 +59,7 @@ get "目錄", to: 'home#menu'
 
 當用戶在對 LINE Bot 發話時輸入「目錄」文字訊息時，就可以將 Request 交給 home_controller 當中的 menu 方法來處理。
 
-詳細說明請參考 [route](/doc/02_route.md)
+詳細說明請參考 [route](/02_route.md)
 
 ## Render Format
 
@@ -73,7 +73,7 @@ get "目錄", to: 'home#menu'
 
 在 controller 你可以在 params 收到一些來自 Kamigo 的參數，用來做身分驗證或取得用戶所發出的關鍵字等。
 
-詳細說明請參考 [controller](/doc/03_controller.md)
+詳細說明請參考 [controller](/03_controller.md)
 
 ## View
 
@@ -81,7 +81,7 @@ get "目錄", to: 'home#menu'
 
 使用 [Kamiflex]() 可以讓你輕鬆打造出 flex message。
 
-詳細說明請參考 [view](/doc/04_view.md)
+詳細說明請參考 [view](/04_view.md)
 
 ## Form
 
@@ -89,4 +89,4 @@ get "目錄", to: 'home#menu'
 
 Kamigo 使用 [Kamiliff]() 來製作 LIFF，你可以在 controller 就取得用戶身分的參數。
 
-詳細說明請參考 [form](/doc/05_form.md)
+詳細說明請參考 [form](/06_form.md)
