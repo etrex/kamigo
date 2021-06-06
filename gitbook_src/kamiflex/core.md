@@ -41,7 +41,7 @@ Kamiflex.build(self) do
   end
 end
 ```
-對應的 Json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -249,7 +249,7 @@ Kamiflex.hash(self) do
   end
 end
 ```
-對應的 Json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
