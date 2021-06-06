@@ -9,7 +9,7 @@ Kamiflex 使用 Ruby 中的 [Block](https://5xruby.tw/posts/discover-ruby-block)
 
 ![picture 3](images/05_kamiflex-e0c281685f2609c53601c849f2b08c2699a61fc0a9412e27ad14b1e712c56249.png)  
 
-Kamiflex 的寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.json(self) do
   bubble do
@@ -44,8 +44,7 @@ Kamiflex.json(self) do
   end
 end
 ```
-
-其對應的Json：
+對應的 JSON：
 ```json
 {
     "type": "flex",
