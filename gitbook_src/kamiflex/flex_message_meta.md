@@ -13,7 +13,7 @@ Kamiflex.build(self) do
     ...
 end
 ```
-Kamiflex 會將該程式碼轉換為Json，`do...end`為block，可以在其中放入 [核心元件](/kamiflex/core.md)。
+Kamiflex 會將該程式碼轉換為JSON，`do...end`為block，可以在其中放入 [核心元件](/kamiflex/core.md)。
 ## Class Method
 下列為 Kamiflex 可以使用的 Class Method，如 `Kamiflex.json`
 
@@ -34,7 +34,7 @@ Kamiflex 會將該程式碼轉換為Json，`do...end`為block，可以在其中�
 - alt_text
 
 #### 使用範例
-Ruby寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
     alt_text "test alt text"
@@ -45,7 +45,7 @@ Kamiflex.build(self) do
     end
 end
 ```
-對應的json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
