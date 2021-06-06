@@ -66,7 +66,7 @@ end
 
 ## bubbles
 #### 說明
-此元件需使用在 `carousel` 之中，達成橫向多筆 Flex Message，若不使用此核心元件，亦可使用 Ruby 原生的 `#each` 搭配 `bubble` 達到相同功能。
+此元件需使用在 `carousel` 之中，達成橫向多筆 Flex Message，若不使用此核心元件，亦可使用 Ruby 原生的 `#each` 搭配 `bubble` 或是直接使用多個 `bubble do...end` 達到相同功能。
 #### 可用的引數
 [說明](/05_kamiflex.md#引數)
 
