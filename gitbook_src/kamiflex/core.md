@@ -124,7 +124,7 @@ Kamiflex.hash(self) do
   end
 end
 ```
-對應的 Json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -444,7 +444,7 @@ size: :full, aspectRatio: "20:13"
     end
 end
 ```
-對應的 JSON:
+對應的 JSON：
 ```json
 {
   "type": "flex",
