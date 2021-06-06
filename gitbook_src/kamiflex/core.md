@@ -1,17 +1,37 @@
 # 核心元件
-核心元件需被寫在Flex Message Meta的block之中。
+核心元件需被寫在 Flex Message Meta 的 `do ... end` 之中。
 ## bubble
 #### 說明
-此元件為Flex Message最基礎之核心元件。
+此元件為 Flex Message 最基礎之核心元件。
 ![](https://developers.line.biz/assets/img/overviewSample.772a618f.png) <br/>
 詳細說明請參考以下連結：<br/>
 [LINE Flex Message 關於 Bubble 的說明文件](https://developers.line.biz/en/docs/messaging-api/flex-message-elements/#bubble) <br/>
 [LINE Flex Message 關於 Bubble 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#bubble)
-#### 相關參數
-請參考官方文件中的[bubble](https://developers.line.biz/en/reference/messaging-api/#bubble)
+
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- size
+
+  可以指定以下其中一個值： `nano`，`micro`，`kilo`，`mega` 或 `giga`。預設為 `mega`。
+
+- direction
+
+  可以指定以下其中一個值： `ltr` 或 `rtl`。預設為 `ltr` 。
+
+- [action](/kamiflex/action.md)
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- [header](#header)
+- [hero](#hero)
+- [body](#body)
+- [footer](#footer)
+- [styles](#styles)
 
 #### 使用範例
-Ruby寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
   bubble size: "nano",direction: "ltr" do
@@ -21,7 +41,7 @@ Kamiflex.build(self) do
   end
 end
 ```
-對應的Json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -46,38 +66,65 @@ end
 
 ## bubbles
 #### 說明
-此元件需使用在`carousel`之中，達成橫向多筆Flex Message，若不使用此核心元件，亦可使用Ruby原生的`#each`搭配`bubble`達到相同功能。
-#### 相關參數
-與`bubble`相同，請參考官方文件中的[bubble](https://developers.line.biz/en/reference/messaging-api/#bubble)
+此元件需使用在 `carousel` 之中，達成橫向多筆 Flex Message，若不使用此核心元件，亦可使用 Ruby 原生的 `#each` 搭配 `bubble` 或是直接使用多個 `bubble do...end` 達到相同功能。
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- size
+
+  可以指定以下其中一個值： `nano`，`micro`，`kilo`，`mega` 或 `giga`。預設為 `mega`。
+
+- direction
+
+  可以指定以下其中一個值： `ltr` 或 `rtl`。預設為 `ltr` 。
+
+- [action](/kamiflex/action.md)
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- [header](#header)
+- [hero](#hero)
+- [body](#body)
+- [footer](#footer)
+- [styles](#styles)
+
 #### 使用範例
-使用`bubbles`的Ruby寫法：
+使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-@strings = ["string1", "string2", "string3"]
-Kamiflex.build(self) do
+strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
+Kamiflex.hash(self) do
   carousel do
-    bubbles @strings, size: "nano", direction: "ltr" do |string|
-      body do
-        text string
-      end
+  bubbles strings do |string|
+    body layout: "horizontal" do
+      text string,wrap: true
     end
+    footer layout: "horizontal" do
+      url_button "Go","https://example.com",style: "primary"
+    end
+  end
   end
 end
 ```
-不使用`bubbles`的Ruby寫法：
+不使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
+Kamiflex.hash(self) do
   carousel do
-    @strings.each do |string|
-      bubble size: "nano", direction: "ltr" do
-        body do
-          text string
+    strings.each do |string|
+      bubble do
+        body layout: "horizontal" do
+          text string,wrap: true
+        end
+        footer layout: "horizontal" do
+          url_button "Go","https://example.com",style: "primary"
         end
       end
     end
   end
 end
 ```
-對應的Json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -89,90 +136,120 @@ end
         "type": "bubble",
         "body": {
           "type": "box",
-          "layout": "vertical",
+          "layout": "horizontal",
           "contents": [
             {
               "type": "text",
-              "text": "string1"
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "wrap": true
             }
           ]
         },
-        "size": "nano",
-        "direction": "ltr"
+        "footer": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "Go",
+                "uri": "https://example.com"
+              },
+              "style": "primary"
+            }
+          ]
+        }
       },
       {
         "type": "bubble",
         "body": {
           "type": "box",
-          "layout": "vertical",
+          "layout": "horizontal",
           "contents": [
             {
               "type": "text",
-              "text": "string2"
+              "text": "Hello, World!",
+              "wrap": true
             }
           ]
         },
-        "size": "nano",
-        "direction": "ltr"
-      },
-      {
-        "type": "bubble",
-        "body": {
+        "footer": {
           "type": "box",
-          "layout": "vertical",
+          "layout": "horizontal",
           "contents": [
             {
-              "type": "text",
-              "text": "string3"
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "Go",
+                "uri": "https://example.com"
+              },
+              "style": "primary"
             }
           ]
-        },
-        "size": "nano",
-        "direction": "ltr"
+        }
       }
     ]
   }
 }
-
 ```
 
 ## carousel
 #### 說明
-此元件可以達成橫向多筆的Flex Message，但在其之中還需要加上bubble元件。
+此元件可以達成橫向多筆的 Flex Message，但在其之中還需要加上 bubble 元件。
 ![](https://developers.line.biz/assets/img/carouselSample.b7d44737.png)<br>
 [LINE Flex Message 關於 Carousel 的說明文件](https://developers.line.biz/en/docs/messaging-api/flex-message-elements/#carousel) <br/>
 [LINE Flex Message 關於 Carousel 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#f-carousel)
-#### 相關參數
-最多僅能12個`bubble`
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+無
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- [bubble](#bubble)
+- [bubbles](#bubbles)
+  
+> 最多12個 bubble
+
 #### 使用範例
-使用`bubbles`的Ruby寫法：
+使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-@strings = ["string1", "string2", "string3"]
-Kamiflex.build(self) do
+strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
+Kamiflex.hash(self) do
   carousel do
-    bubbles @strings, size: "nano", direction: "ltr" do |string|
-      body do
-        text string
-      end
+  bubbles strings do |string|
+    body layout: "horizontal" do
+      text string,wrap: true
     end
+    footer layout: "horizontal" do
+      url_button "Go","https://example.com",style: "primary"
+    end
+  end
   end
 end
 ```
-不使用`bubbles`的Ruby寫法：
+不使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
+Kamiflex.hash(self) do
   carousel do
-    @strings.each do |string|
-      bubble size: "nano", direction: "ltr" do
-        body do
-          text string
+    strings.each do |string|
+      bubble do
+        body layout: "horizontal" do
+          text string,wrap: true
+        end
+        footer layout: "horizontal" do
+          url_button "Go","https://example.com",style: "primary"
         end
       end
     end
   end
 end
 ```
-對應的Json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -184,64 +261,114 @@ end
         "type": "bubble",
         "body": {
           "type": "box",
-          "layout": "vertical",
+          "layout": "horizontal",
           "contents": [
             {
               "type": "text",
-              "text": "string1"
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "wrap": true
             }
           ]
         },
-        "size": "nano",
-        "direction": "ltr"
+        "footer": {
+          "type": "box",
+          "layout": "horizontal",
+          "contents": [
+            {
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "Go",
+                "uri": "https://example.com"
+              },
+              "style": "primary"
+            }
+          ]
+        }
       },
       {
         "type": "bubble",
         "body": {
           "type": "box",
-          "layout": "vertical",
+          "layout": "horizontal",
           "contents": [
             {
               "type": "text",
-              "text": "string2"
+              "text": "Hello, World!",
+              "wrap": true
             }
           ]
         },
-        "size": "nano",
-        "direction": "ltr"
-      },
-      {
-        "type": "bubble",
-        "body": {
+        "footer": {
           "type": "box",
-          "layout": "vertical",
+          "layout": "horizontal",
           "contents": [
             {
-              "type": "text",
-              "text": "string3"
+              "type": "button",
+              "action": {
+                "type": "uri",
+                "label": "Go",
+                "uri": "https://example.com"
+              },
+              "style": "primary"
             }
           ]
-        },
-        "size": "nano",
-        "direction": "ltr"
+        }
       }
     ]
   }
 }
-
 ```
 
-# 屬性
-核心元件屬性需放置在bubble或是bubbles的block之中，並且各個屬性應確保其Json同層而不存在上下層關聯。
 ## header
 #### 說明
-呈現在Flex Message最頂部，一般用來放置標題使用
-#### 相關參數
-Kamflex會為`header`自動創立一個容器元件`box`，關於容器元件`box`參數請參考官方文件中的[box](https://developers.line.biz/en/reference/messaging-api/#box)
-> 此處無法直接使用`header`參數，若想使用`header`參數請搭配[styles](#styles)
+需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 的最頂部，一般用來放置標題使用。
+
+Kamflex 會為 header 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
+> 此處無法直接修飾 header 的 style，若想修飾 header 的 style 請使用 [styles](#styles)
+
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- layout
+- backgroundColor
+- borderColor
+- borderWidth
+- cornerRadius
+- width
+- height
+- flex
+- spacing
+- margin
+- paddingAll
+- paddingTop
+- paddingBottom
+- paddingStart
+- paddingEnd
+- position
+- offsetTop
+- offsetBottom
+- offsetStart
+- offsetEnd
+- [action](/kamiflex/action.md)
+- justifyContent
+- alignItems
+- background.type
+- background.angle
+- background.startColor
+- background.endColor
+- background.centerColor
+- background.centerPosition
+
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- [容器元件](/kamiflex/container.md)
+- [基礎組件](/kamiflex/basic_element.md)
 
 #### 使用範例
-Ruby的寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
   bubble do
@@ -251,7 +378,7 @@ Kamiflex.build(self) do
   end
 end
 ```
-對應的json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -277,15 +404,38 @@ end
 
 ## hero
 #### 說明
-呈現在Flex Message `header`之下，`body`之上，一般用來放置圖片，**由於不需要搭配block。後方不需再加入`{...}`或是`do...end`**。
-#### 相關參數
-kamiflex預設`hero`的`type`為`image`元件，因此需搭配[image元件參數](https://developers.line.biz/en/reference/messaging-api/#f-image)使用
-> 此處無法直接使用`hero`參數，若想使用`hero`參數請搭配[styles](#styles)
+需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在Flex Message [header](#header) 之下，[body](#body) 之上，一般用來放置圖片，**由於不需要搭配block。後方不需再加入`{...}`或是`do...end`**。
 
-> `hero`的`type`除了`image`元件外，也可以選擇為`box`元件
+kamiflex 預設 hero 的 type 為 Image 元件，相關引述請搭配 [LINE Flex Message 關於 Image 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#f-image)。
+> 此處無法直接修飾 hero 的 style，若想修飾 hero 的 style 請使用 [styles](#styles)
+> hero 的 type 除了 image 元件外，也可以選擇為 box 元件
 
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- image_url (必填)
+- flex
+- margin
+- position
+- offsetTop
+- offsetBottom
+- offsetStart
+- offsetEnd
+- align
+- gravity
+- size
+- aspectRatio
+- aspectMode
+- backgroundColor
+- animated
+- [action](/kamiflex/action.md)
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+無
 #### 使用範例
-Ruby的寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
     bubble do
@@ -294,7 +444,7 @@ size: :full, aspectRatio: "20:13"
     end
 end
 ```
-對應的json:
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -314,13 +464,53 @@ end
 
 ### body
 #### 說明
-呈現在Flex Message中間的位置，一般用於表達內文。
-#### 參數
-Kamflex會為`body`自動創立一個容器元件`box`，關於容器元件`box`參數請參考官方文件中的[box](https://developers.line.biz/en/reference/messaging-api/#box)
-> 此處無法直接使用`body`參數，若想使用`body`參數請搭配[styles](#styles)
+需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於表達內文。
+
+Kamflex 會為 body 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)
+> 此處無法直接修飾 body 的 style，若想修飾 body 的 style 請使用 [styles](#styles)
+
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- layout
+- backgroundColor
+- borderColor
+- borderWidth
+- cornerRadius
+- width
+- height
+- flex
+- spacing
+- margin
+- paddingAll
+- paddingTop
+- paddingBottom
+- paddingStart
+- paddingEnd
+- position
+- offsetTop
+- offsetBottom
+- offsetStart
+- offsetEnd
+- [action](/kamiflex/action.md)
+- justifyContent
+- alignItems
+- background.type
+- background.angle
+- background.startColor
+- background.endColor
+- background.centerColor
+- background.centerPosition
+
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- [容器元件](/kamiflex/container.md)
+- [基礎組件](/kamiflex/basic_element.md)
 
 #### 使用範例
-Ruby寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
   bubble do
@@ -330,7 +520,7 @@ Kamiflex.build(self) do
   end
 end
 ```
-對應的json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -356,13 +546,53 @@ end
 
 ### footer
 #### 說明
-呈現在Flex Message最底部的位置，一般用於放置按鈕。
-#### 參數
-Kamflex會為`footer`自動創立一個容器元件`box`，關於容器元件`box`參數請參考官方文件中的[box](https://developers.line.biz/en/reference/messaging-api/#box)
-> 此處無法直接使用`footer`參數，若想使用`body`參數請搭配[styles](#styles)
+需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於放置按鈕。
+
+Kamflex 會為 footer 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)
+> 此處無法直接修飾 footer 的 style，若想修飾 footer 的 style 請使用 [styles](#styles)
+
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- layout
+- backgroundColor
+- borderColor
+- borderWidth
+- cornerRadius
+- width
+- height
+- flex
+- spacing
+- margin
+- paddingAll
+- paddingTop
+- paddingBottom
+- paddingStart
+- paddingEnd
+- position
+- offsetTop
+- offsetBottom
+- offsetStart
+- offsetEnd
+- [action](/kamiflex/action.md)
+- justifyContent
+- alignItems
+- background.type
+- background.angle
+- background.startColor
+- background.endColor
+- background.centerColor
+- background.centerPosition
+
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- [容器元件](/kamiflex/container.md)
+- [基礎組件](/kamiflex/basic_element.md)
 
 #### 使用範例
-Ruby寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
   bubble do
@@ -372,7 +602,7 @@ Kamiflex.build(self) do
   end
 end
 ```
-對應的json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
@@ -397,11 +627,21 @@ end
     
 ### styles
 #### 說明
-主要功能為更改核心元件屬性的style。
-#### 相關參數
-請參考官方文件中的[block style](https://developers.line.biz/en/reference/messaging-api/#block-style)
+主要功能為修飾 [header](#header)、[hero](#hero)、[body](#body)、[footer](#footer) 的style。
+請參考官方文件中的 [LINE Flex Message 關於 Block Style 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#block-style)。
+
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+僅接受一個 Hash，
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+無
+
 #### 使用範例
-Ruby寫法：
+Ruby 寫法：
 ```ruby
 Kamiflex.build(self) do
   bubble size: "mega" do
@@ -416,28 +656,28 @@ Kamiflex.build(self) do
       message_button "同意", "不只好用還好潮！真的讚！"
     end
     styles ({ header: {
-             "backgroundColor": "#ffffff",
-             "separator": true,
-             "separatorColor": "#c2c2c2",
+             backgroundColor: "#ffffff",
+             separator: true,
+             separatorColor: "#c2c2c2",
            },
              hero: {
-             "separator": true,
-             "separatorColor": "#c2c2c2",
+             separator: true,
+             separatorColor: "#c2c2c2",
            },
              body: {
-             "backgroundColor": "#ffffff",
-             "separator": true,
-             "separatorColor": "#c2c2c2",
+             backgroundColor: "#ffffff",
+             separator: true,
+             separatorColor: "#c2c2c2",
            },
              footer: {
-             "backgroundColor": "#ffffff",
-             "separator": true,
-             "separatorColor": "#c2c2c2",
+             backgroundColor: "#ffffff",
+             separator: true,
+             separatorColor: "#c2c2c2",
            } })
   end
 end
 ```
-對應的json：
+對應的 JSON：
 ```json
 {
   "type": "flex",
