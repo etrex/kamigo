@@ -13,13 +13,39 @@ Kamiflex.build(self) do
     ...
 end
 ```
-kamiflex會將該程式碼轉換為Json，`{...}`為block，可以在其中放入核心元件(如bubble、carousel)。
+Kamiflex 會將該程式碼轉換為Json，`do...end`為block，可以在其中放入 [核心元件](/kamiflex/core.md)。
+## Class Method
+下列為 Kamiflex 可以使用的 Class Method，如 `Kamiflex.json`
 
-## 屬性
-### alt_text
-#### 說明
-此屬性的修改放在Block中，預設文字為`this is a flex message`。
+- .hash
+- .to_hash
+- .build
+- .json
+- .compact_json
+
+#### 可用的引數
+[說明](/05_kamiflex.md#引數)
+
+- parent (必填)
+
+#### 區塊中的方法
+[說明](/05_kamiflex.md#區塊中的方法)
+
+- alt_text
+
 #### 使用範例
+Ruby寫法：
+```ruby
+Kamiflex.build(self) do
+    alt_text "test alt text"
+    bubble do
+      body do
+        text "Hello, World!"
+      end
+    end
+end
+```
+對應的json：
 ```json
 {
   "type": "flex",
@@ -42,6 +68,6 @@ kamiflex會將該程式碼轉換為Json，`{...}`為block，可以在其中放�
 ```
 #### 運行結果
 ![picture 2](/images/flex_Message_meta-856a06e4a473cc80f7d9bf83ed2107c349830e0f43f4e7a80a1bde98af297b9d.jpeg)
- 
+
 
 

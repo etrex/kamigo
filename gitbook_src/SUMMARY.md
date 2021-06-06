@@ -5,8 +5,6 @@
 * [View 的使用說明](/04_view.md)
 * [Kamiflex 的使用說明](/05_kamiflex.md)
   * [Flex Message Meta](/kamiflex/flex_message_meta.md)
-    * [屬性](/kamiflex/flex_message_meta.md#屬性)
-      * [alttext](/kamiflex/flex_message_meta.md#alt-text)
   * [核心元件](/kamiflex/core.md)
     * [bubble](/kamiflex/core.md#bubble)
     * [bubbles](/kamiflex/core.md#bubbles)
