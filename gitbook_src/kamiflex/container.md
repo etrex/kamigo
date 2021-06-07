@@ -99,7 +99,7 @@ end
 
 ## vertical_box
 #### 說明
-Kamiflex 會為 horizontal_box 新增一個 box，並且將該 box 的 layout 引數設成 vertical，關於 box 的說明請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
+Kamiflex 會為 vertical_box 新增一個 box，並且將該 box 的 layout 引數設成 vertical，關於 box 的說明請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
 
 #### 可用的引數
 [說明](/05_kamiflex.md#引數)
@@ -196,7 +196,7 @@ end
 
 ## baseline_box
 #### 說明
-Kamiflex 會為 horizontal_box 新增一個 box，並且將該 box 的 layout 引數設成 baseline，關於 box 的說明請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
+Kamiflex 會為 baseline_box 新增一個 box，並且將該 box 的 layout 引數設成 baseline，關於 box 的說明請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
 
 關於 baseline_box 與 horizontal_box 的差別，請查看官方文件中的 [Characteristics of a baseline box](https://developers.line.biz/en/docs/messaging-api/flex-message-layout/#baseline-box)
 
