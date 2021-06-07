@@ -1,0 +1,747 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Kamigo 架構概觀 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-advanced-emoji/emoji-website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="02_route.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="01_intro.html">
+            
+                <a href="01_intro.html">
+            
+                    
+                    Kamigo 架構概觀
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="02_route.html">
+            
+                <a href="02_route.html">
+            
+                    
+                    Route 的使用說明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="03_controller.html">
+            
+                <a href="03_controller.html">
+            
+                    
+                    Controller 的使用說明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="04_view.html">
+            
+                <a href="04_view.html">
+            
+                    
+                    View 的使用說明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="05_kamiflex.html">
+            
+                <a href="05_kamiflex.html">
+            
+                    
+                    Kamiflex 的使用說明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="kamiflex/flex_message_meta.html">
+            
+                <a href="kamiflex/flex_message_meta.html">
+            
+                    
+                    Flex Message Meta
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html">
+            
+                    
+                    核心元件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#bubble">
+            
+                    
+                    Bubble
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#bubbles">
+            
+                    
+                    Bubbles
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#carousel">
+            
+                    
+                    Carousel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.4" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#header">
+            
+                    
+                    Header
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.5" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#hero">
+            
+                    
+                    Hero
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.6" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#body">
+            
+                    
+                    Body
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.7" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#footer">
+            
+                    
+                    Footer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.8" data-path="kamiflex/core.html">
+            
+                <a href="kamiflex/core.html#styles">
+            
+                    
+                    Styles
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="kamiflex/container.html">
+            
+                <a href="kamiflex/container.html">
+            
+                    
+                    容器元件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.3.1" data-path="kamiflex/container.html">
+            
+                <a href="kamiflex/container.html#horizontal-box">
+            
+                    
+                    Horizontal Box
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.2" data-path="kamiflex/container.html">
+            
+                <a href="kamiflex/container.html#vertical-box">
+            
+                    
+                    Vertical Box
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3.3" data-path="kamiflex/container.html">
+            
+                <a href="kamiflex/container.html#baseline-box">
+            
+                    
+                    Baseline Box
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html">
+            
+                    
+                    基礎組件
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.4.1" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#text">
+            
+                    
+                    Text
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.2" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#image">
+            
+                    
+                    Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.3" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#icon">
+            
+                    
+                    Icon
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.4" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#separator">
+            
+                    
+                    Separator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.5" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#filler">
+            
+                    
+                    Filler
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.6" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#message-button">
+            
+                    
+                    Message Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.7" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#url-button">
+            
+                    
+                    URL Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.8" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#postback-button">
+            
+                    
+                    Postback Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4.9" data-path="kamiflex/basic_element.html">
+            
+                <a href="kamiflex/basic_element.html#postback-text-button">
+            
+                    
+                    Postback Text Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="kamiflex/action.html">
+            
+                <a href="kamiflex/action.html">
+            
+                    
+                    點擊事件
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="06_form.html">
+            
+                <a href="06_form.html">
+            
+                    
+                    Form 的使用說明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="07_setting.html">
+            
+                <a href="07_setting.html">
+            
+                    
+                    Kamigo 相關設定與 QA
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Kamigo 架構概觀</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="kamigo-&#x67B6;&#x69CB;&#x6982;&#x89C0;">Kamigo &#x67B6;&#x69CB;&#x6982;&#x89C0;</h1>
+<h2 id="&#x8A2D;&#x8A08;&#x7406;&#x5FF5;">&#x8A2D;&#x8A08;&#x7406;&#x5FF5;</h2>
+<p>Kamigo &#x662F;&#x57FA;&#x65BC; Rails &#x7684; Chatbot MVC Framework&#xFF0C;&#x7AED;&#x76E1;&#x6240;&#x80FD;&#x7684;&#x5C07;&#x804A;&#x5929;&#x6A5F;&#x5668;&#x4EBA;&#x7684;&#x958B;&#x767C;&#x8207;&#x7DB2;&#x7AD9;&#x958B;&#x767C;&#x505A;&#x5C0D;&#x61C9;&#xFF0C;&#x4E26;&#x4E14;&#x76E1;&#x53EF;&#x80FD;&#x7684;&#x4F7F;&#x7528; Rails &#x65E2;&#x6709;&#x7684;&#x529F;&#x80FD;&#x4F86;&#x589E;&#x52A0;&#x5F48;&#x6027;&#x3002;</p>
+<p>&#x5728;&#x804A;&#x5929;&#x6A5F;&#x5668;&#x4EBA;&#x958B;&#x767C;&#x7576;&#x4E2D;&#x7684;&#x300C;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x300D;&#x662F;&#x5C0D;&#x61C9;&#x5230;&#x7DB2;&#x7AD9;&#x958B;&#x767C;&#x7576;&#x4E2D;&#x7684;&#x8DEF;&#x7531;&#xFF08;Route&#xFF09;&#x3002;</p>
+<p>&#x300C;&#x5C0D;&#x8A71;&#x7BA1;&#x7406;&#x300D;&#x5C0D;&#x61C9;&#x5230; Controller &#x4EE5;&#x53CA; Model&#x3002;</p>
+<p>&#x800C;&#x300C;&#x8A9E;&#x8A00;&#x751F;&#x6210;&#x300D;&#x5247;&#x662F;&#x5C0D;&#x61C9;&#x5230; view&#x3002;</p>
+<p>&#x4F7F;&#x7528; Kamigo&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x540C;&#x6642;&#x958B;&#x767C; Chatbot &#x4EE5;&#x53CA; Web&#xFF0C;&#x800C;&#x4E14;&#x5171;&#x7528; Controller &#x4EE5;&#x53CA; Model&#x3002;</p>
+<h2 id="&#x67B6;&#x69CB;&#x6982;&#x89C0;">&#x67B6;&#x69CB;&#x6982;&#x89C0;</h2>
+<p>Kamigo &#x5BE6;&#x4F5C;&#x4E86;&#x63A5;&#x53D7; LINE Webhook &#x7684; Controller &#x4EE5;&#x53CA;&#x5C0D;&#x61C9;&#x7684; Route&#x3002;</p>
+<p>controller: <a href="https://github.com/etrex/Kamigo/blob/master/app/controllers/line_controller.rb" target="_blank">https://github.com/etrex/Kamigo/blob/master/app/controllers/line_controller.rb</a>
+routes: <a href="https://github.com/etrex/Kamigo/blob/master/config/routes.rb" target="_blank">https://github.com/etrex/Kamigo/blob/master/config/routes.rb</a></p>
+<p>&#x4EE5;&#x4E0A;&#x7684;&#x7A0B;&#x5F0F;&#x78BC;&#x4F7F;&#x5F97; Kamigo &#x5728;&#x63A5;&#x6536;&#x5230;&#x4F86;&#x81EA; Webhook &#x7684;&#x8A0A;&#x606F;&#x5F8C;&#xFF0C;&#x6703;&#x5C07;&#x8A0A;&#x606F;&#x7528;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x7684;&#x65B9;&#x5F0F;&#x8F49;&#x63DB;&#x70BA;&#xFF08;Intent&#xFF09;&#x4EE5;&#x53CA;&#x95DC;&#x9375;&#x5B57;&#xFF08;Entity&#xFF09;&#xFF0C;&#x4E26;&#x4E14;&#x751F;&#x6210;&#x4E00;&#x500B;&#x65B0;&#x7684; Request &#x518D;&#x767C;&#x9001;&#x7D66;&#x5C0D;&#x61C9;&#x7684; Controller Action&#xFF0C;&#x53D6;&#x5F97; Response &#x5F8C;&#xFF0C;&#x518D;&#x4F7F;&#x7528; Reply API &#x5C07; Response &#x8A0A;&#x606F;&#x56DE;&#x50B3;&#x7D66;&#x7528;&#x6236;&#x3002;</p>
+<h2 id="webhook-&#x8A2D;&#x5B9A;">webhook &#x8A2D;&#x5B9A;</h2>
+<p>&#x5F9E; <a href="https://github.com/etrex/Kamigo/blob/master/config/routes.rb" target="_blank">routes.rb</a> &#x7576;&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x9019;&#x4E00;&#x884C;&#xFF1A;</p>
+<pre><code>post &apos;line&apos;, to: &apos;line#entry&apos;
+</code></pre><p>&#x8868;&#x793A;&#x7DB2;&#x7AD9;&#x6703;&#x63A5;&#x53D7; POST &#x5230; <code>/line</code> &#x7684; Request&#xFF0C;&#x4E26;&#x4E14;&#x4EA4;&#x7D66; line_controller &#x7576;&#x4E2D;&#x7684; entry &#x65B9;&#x6CD5;&#x4F86;&#x8655;&#x7406;&#x3002;</p>
+<p>&#x9019;&#x8868;&#x793A;&#x4F60;&#x61C9;&#x8A72;&#x5728;&#x4F60;&#x7684; LINE Bot &#x8A2D;&#x5B9A; Webhook Url &#x70BA; <code>https://&#x4F60;&#x7684;&#x7DB2;&#x57DF;/line</code>&#x3002;</p>
+<h2 id="rails-generator">rails generator</h2>
+<p>&#x5728;&#x5B89;&#x88DD; Kamigo &#x5F8C;&#xFF0C;&#x4F7F;&#x7528; <code>rails g scaffold</code> &#x53EF;&#x4EE5;&#x751F;&#x6210; Kamigo &#x9B54;&#x6539;&#x5F8C;&#x7684; controller &#x4EE5;&#x53CA; view&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x7C21;&#x55AE;&#x8AAA;&#x660E;&#x5404;&#x9805;&#x8CA0;&#x8CAC;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<h2 id="routes">routes</h2>
+<p>Kamigo &#x6C92;&#x6709;&#x4FEE;&#x6539; rails routes &#x7684;&#x5BE6;&#x4F5C;&#x3002;</p>
+<p>line_controller &#x6703;&#x8B80;&#x53D6; LINE &#x8A0A;&#x606F;&#x7576;&#x4E2D;&#x7684;&#x6587;&#x5B57;&#x8A0A;&#x606F;&#xFF0C;&#x4E26;&#x4E14;&#x5617;&#x8A66;&#x7406;&#x89E3;&#x6587;&#x5B57;&#x8A0A;&#x606F;&#x7576;&#x4E2D;&#x7684;&#x610F;&#x5716;&#xFF08;intent&#xFF09;&#x4EE5;&#x53CA;&#x95DC;&#x9375;&#x5B57;&#xFF08;entity&#xFF09;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x7684;&#x90E8;&#x5206;&#xFF0C;</p>
+<p>&#x76EE;&#x524D;&#x50C5;&#x5BE6;&#x4F5C;&#x4E86;&#x4E00;&#x500B;&#x6700;&#x57FA;&#x672C;&#x7684;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x6A21;&#x578B;&#xFF0C;&#x76F4;&#x63A5;&#x5047;&#x8A2D;&#x7528;&#x6236;&#x8F38;&#x5165;&#x7684;&#x6587;&#x5B57;&#x662F;&#x7DB2;&#x5740;&#x4F86;&#x505A;&#x89E3;&#x6790;&#xFF0C;&#x4E4B;&#x5F8C;&#x6703;&#x652F;&#x63F4;&#x5404;&#x5927;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x5E73;&#x53F0;&#x7684;&#x4E32;&#x63A5;&#x3002;</p>
+<p>&#x64F7;&#x53D6;&#x51FA;&#x610F;&#x5716;&#x4EE5;&#x53CA;&#x95DC;&#x9375;&#x5B57;&#x4E4B;&#x5F8C;&#xFF0C;&#x6703;&#x5617;&#x8A66;&#x627E;&#x5230;&#x6B64;&#x610F;&#x5716;&#x6240;&#x5C0D;&#x61C9;&#x7684; controller action&#xFF0C;&#x4E26;&#x4E14;&#x5C07;&#x95DC;&#x9375;&#x5B57;&#x4F5C;&#x70BA; params &#x50B3;&#x5165;&#x6B64; action&#x3002;</p>
+<p>&#x7C21;&#x800C;&#x8A00;&#x4E4B;&#xFF0C;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x5C31;&#x50CF;&#x662F;&#x5728;&#x505A; routes &#x7684;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>&#x76EE;&#x524D; Kamigo &#x652F;&#x63F4;&#x5728; routes &#x64B0;&#x5BEB;&#x4E00;&#x4E9B;&#x7C21;&#x55AE;&#x7684;&#x8A9E;&#x610F;&#x7406;&#x89E3;&#x898F;&#x5247;&#xFF0C;&#x6BD4;&#x65B9;&#x8AAA;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4F60;&#x7684;&#x5C08;&#x6848;&#x7576;&#x4E2D;&#x7684; routes.rb &#x5BEB;&#x5165;&#x4EE5;&#x4E0B;&#x7A0B;&#x5F0F;&#x78BC;&#xFF1A;</p>
+<pre><code class="lang-ruby">get <span class="hljs-string">&quot;&#x76EE;&#x9304;&quot;</span>, <span class="hljs-symbol">to:</span> <span class="hljs-string">&apos;home#menu&apos;</span>
+</code></pre>
+<p>&#x7576;&#x7528;&#x6236;&#x5728;&#x5C0D; LINE Bot &#x767C;&#x8A71;&#x6642;&#x8F38;&#x5165;&#x300C;&#x76EE;&#x9304;&#x300D;&#x6587;&#x5B57;&#x8A0A;&#x606F;&#x6642;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5C07; Request &#x4EA4;&#x7D66; home_controller &#x7576;&#x4E2D;&#x7684; menu &#x65B9;&#x6CD5;&#x4F86;&#x8655;&#x7406;&#x3002;</p>
+<p>&#x8A73;&#x7D30;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003; <a href="02_route.html">route</a></p>
+<h2 id="render-format">Render Format</h2>
+<p>&#x7576;&#x7528;&#x6236;&#x5728;&#x5C0D; LINE Bot &#x767C;&#x8A71;&#x6642;&#x8F38;&#x5165;&#x300C;&#x76EE;&#x9304;&#x300D;&#x6642;&#xFF0C;&#x5BE6;&#x969B;&#x4E0A;&#xFF0C;Kamigo &#x6703;&#x751F;&#x6210;&#x4E00;&#x500B; GET <a href="https://&#x4F60;&#x7684;&#x7DB2;&#x57DF;/&#x76EE;&#x9304;.line" target="_blank">https://&#x4F60;&#x7684;&#x7DB2;&#x57DF;/&#x76EE;&#x9304;.line</a> &#x7684; Request</p>
+<p>&#x7DB2;&#x5740;&#x7576;&#x4E2D;&#x7684; .line &#x662F;&#x5728;&#x6307;&#x5B9A; render format&#xFF0C;&#x7576;&#x4E00;&#x500B; Request &#x7684; Format &#x70BA; line &#x7684;&#x6642;&#x5019;&#xFF0C;render engine &#x6703;&#x53BB;&#x5617;&#x8A66;&#x5C0B;&#x627E; views &#x8CC7;&#x6599;&#x593E;&#x7576;&#x4E2D;&#x526F;&#x6A94;&#x540D;&#x70BA; .line &#x7684;&#x6A94;&#x6848;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x5728; controller &#x7576;&#x4E2D;&#x900F;&#x904E; params[:format] &#x53D6;&#x5F97;&#x7576;&#x4E0B; Request &#x7684; Format &#x70BA;&#x4F55;&#x3002;</p>
+<h2 id="controller">Controller</h2>
+<p>&#x5728; controller &#x4F60;&#x53EF;&#x4EE5;&#x5728; params &#x6536;&#x5230;&#x4E00;&#x4E9B;&#x4F86;&#x81EA; Kamigo &#x7684;&#x53C3;&#x6578;&#xFF0C;&#x7528;&#x4F86;&#x505A;&#x8EAB;&#x5206;&#x9A57;&#x8B49;&#x6216;&#x53D6;&#x5F97;&#x7528;&#x6236;&#x6240;&#x767C;&#x51FA;&#x7684;&#x95DC;&#x9375;&#x5B57;&#x7B49;&#x3002;</p>
+<p>&#x8A73;&#x7D30;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003; <a href="03_controller.html">controller</a></p>
+<h2 id="view">View</h2>
+<p>&#x5728; view &#x7576;&#x4E2D;&#xFF0C;&#x76F4;&#x63A5;&#x8F38;&#x51FA; LINE Message API &#x6240;&#x9700;&#x8981;&#x7684; json &#x5373;&#x53EF;&#x3002;</p>
+<p>&#x4F7F;&#x7528; <a href="">Kamiflex</a> &#x53EF;&#x4EE5;&#x8B93;&#x4F60;&#x8F15;&#x9B06;&#x6253;&#x9020;&#x51FA; flex message&#x3002;</p>
+<p>&#x8A73;&#x7D30;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003; <a href="04_view.html">view</a></p>
+<h2 id="form">Form</h2>
+<p>&#x76EE;&#x524D; Kamigo &#x50C5;&#x63D0;&#x4F9B; LIFF &#x4F5C;&#x70BA;&#x8868;&#x55AE;&#x586B;&#x5BEB;&#x7684;&#x89E3;&#x6C7A;&#x65B9;&#x6848;&#xFF0C;&#x65E5;&#x5F8C;&#x6709;&#x53EF;&#x80FD;&#x6703;&#x52A0;&#x5165;&#x5C0D;&#x8A71;&#x5F0F;&#x8868;&#x55AE;&#x7684;&#x586B;&#x5BEB;&#x3002;</p>
+<p>Kamigo &#x4F7F;&#x7528; <a href="">Kamiliff</a> &#x4F86;&#x88FD;&#x4F5C; LIFF&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728; controller &#x5C31;&#x53D6;&#x5F97;&#x7528;&#x6236;&#x8EAB;&#x5206;&#x7684;&#x53C3;&#x6578;&#x3002;</p>
+<p>&#x8A73;&#x7D30;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003; <a href="06_form.html">form</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="02_route.html" class="navigation navigation-next " aria-label="Next page: Route 的使用說明">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Kamigo 架構概觀","level":"1.2","depth":1,"next":{"title":"Route 的使用說明","level":"1.3","depth":1,"path":"02_route.md","ref":"02_route.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"01_intro.md","mtime":"2021-06-02T15:09:10.880Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-07T09:00:51.421Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
