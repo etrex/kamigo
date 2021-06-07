@@ -1,6 +1,6 @@
 # 核心元件
 核心元件需被寫在 Flex Message Meta 的 `do ... end` 之中。
-## bubble
+## Bubble
 #### 說明
 此元件為 Flex Message 最基礎之核心元件。
 ![](https://developers.line.biz/assets/img/overviewSample.772a618f.png) <br/>
@@ -64,7 +64,7 @@ end
 }
 ```
 
-## bubbles
+## Bubbles
 #### 說明
 此元件需使用在 `carousel` 之中，達成橫向多筆 Flex Message，若不使用此核心元件，亦可使用 Ruby 原生的 `#each` 搭配 `bubble` 或是直接使用多個 `bubble do...end` 達到相同功能。
 #### 可用的引數
@@ -195,7 +195,7 @@ end
 }
 ```
 
-## carousel
+## Carousel
 #### 說明
 此元件可以達成橫向多筆的 Flex Message，但在其之中還需要加上 bubble 元件。
 ![](https://developers.line.biz/assets/img/carouselSample.b7d44737.png)<br>
@@ -320,7 +320,7 @@ end
 }
 ```
 
-## header
+## Header
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 的最頂部，一般用來放置標題使用。
 
@@ -402,7 +402,7 @@ end
 
 ```
 
-## hero
+## Hero
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在Flex Message [header](#header) 之下，[body](#body) 之上，一般用來放置圖片，**由於不需要搭配block。後方不需再加入`{...}`或是`do...end`**。
 
@@ -462,7 +462,7 @@ end
 
 ```
 
-## body
+## Body
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於表達內文。
 
@@ -544,7 +544,7 @@ end
 
 ```
 
-## footer
+## Footer
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於放置按鈕。
 
@@ -625,7 +625,7 @@ end
 }
 ```
     
-## styles
+## Styles
 #### 說明
 主要功能為修飾 [header](#header)、[hero](#hero)、[body](#body)、[footer](#footer) 的style。
 請參考官方文件中的 [LINE Flex Message 關於 Block Style 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#block-style)。
