@@ -15,14 +15,9 @@
     * [footer](/kamiflex/core.md#footer)
     * [styles](/kamiflex/core.md#styles)
   * [容器元件](/kamiflex/container.md)
-    * [box](/kamiflex/container.md#box)
-      * [horizontal_box](/kamiflex/container.md#horizontal_box)
-      * [vertical_box](/kamiflex/container.md#vertical_box)
-      * [baseline_box](/kamiflex/container.md#baseline_box)
-    * icon
-    * separator
-    * spacer
-    * filler
+    * [horizontal_box](/kamiflex/container.md#horizontal_box)
+    * [vertical_box](/kamiflex/container.md#vertical_box)
+    * [baseline_box](/kamiflex/container.md#baseline_box)
   * [基礎組件](/kamiflex/basic_element.md)
   * [點擊事件](/kamiflex/action.md)
 * [Form 的使用說明](/06_form.md)

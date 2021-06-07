@@ -462,7 +462,7 @@ end
 
 ```
 
-### body
+## body
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於表達內文。
 
@@ -544,7 +544,7 @@ end
 
 ```
 
-### footer
+## footer
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於放置按鈕。
 
@@ -625,7 +625,7 @@ end
 }
 ```
     
-### styles
+## styles
 #### 說明
 主要功能為修飾 [header](#header)、[hero](#hero)、[body](#body)、[footer](#footer) 的style。
 請參考官方文件中的 [LINE Flex Message 關於 Block Style 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#block-style)。
