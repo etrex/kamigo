@@ -32,5 +32,6 @@
     * [Message Action](/kamiflex/action.md#message-action)
     * [URI Action](/kamiflex/action.md#uri-action)
     * [Postback Action](/kamiflex/action.md#postback-action)
+  * [相關工具](/kamiflex/tools.md)
 * [Form 的使用說明](/06_form.md)
 * [Kamigo 相關設定與 QA](/07_setting.md)
