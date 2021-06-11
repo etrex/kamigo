@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>點擊事件 · GitBook</title>
+        <title>相關工具 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -73,10 +73,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="action.html" />
+    <link rel="next" href="../06_form.html" />
     
     
-    <link rel="prev" href="basic_element.html" />
+    <link rel="prev" href="showcase.html" />
     
 
     </head>
@@ -514,7 +514,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6.5" data-path="action.html">
+        <li class="chapter " data-level="1.6.5" data-path="action.html">
             
                 <a href="action.html">
             
@@ -585,7 +585,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.7" data-path="tools.html">
+        <li class="chapter active" data-level="1.6.7" data-path="tools.html">
             
                 <a href="tools.html">
             
@@ -659,7 +659,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >點擊事件</a>
+        <a href=".." >相關工具</a>
     </h1>
 </div>
 
@@ -674,155 +674,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;">&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;</h1>
-<p>Action &#x53EF;&#x4EE5;&#x70BA; <a href="basic_element.html">&#x57FA;&#x790E;&#x7D44;&#x4EF6;</a> &#x6216;&#x90E8;&#x5206;&#x7684; <a href="basic_element.html">&#x57FA;&#x790E;&#x7D44;&#x4EF6;</a> &#x65B0;&#x589E;&#x9EDE;&#x64CA;&#x4E8B;&#x4EF6;&#x3002;</p>
-<h2 id="message-action">Message Action</h2>
-<h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
-<p>Message Action &#x662F;&#x4E00;&#x500B;&#x9EDE;&#x64CA;&#x5F8C;&#x6703;&#x50B3;&#x9001;&#x6587;&#x5B57;&#x7684; Action&#xFF0C;&#x95DC;&#x65BC; Action &#x7684;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#action-objects" target="_blank">LINE Flex Message &#x95DC;&#x65BC; Action &#x7684; API Reference</a>&#x3002;</p>
-<h4 id="&#x53EF;&#x7528;&#x7684;&#x5F15;&#x6578;">&#x53EF;&#x7528;&#x7684;&#x5F15;&#x6578;</h4>
-<p><a href="../05_kamiflex.html#&#x5F15;&#x6578;">&#x8AAA;&#x660E;</a></p>
-<ul>
-<li>label (&#x5FC5;&#x586B;)</li>
-<li><p>text</p>
-<p>  &#x9EDE;&#x64CA;&#x5F8C;&#x6703;&#x50B3;&#x9001;&#x7684;&#x6587;&#x5B57;&#xFF0C;&#x9810;&#x8A2D;&#x8207; label &#x4E00;&#x6A23;</p>
-</li>
-</ul>
-<h4 id="&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;">&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;</h4>
-<p><a href="../05_kamiflex.html#&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;">&#x8AAA;&#x660E;</a></p>
-<p>&#x7121;</p>
-<h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
-<p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
-  bubble <span class="hljs-keyword">do</span>
-    body <span class="hljs-keyword">do</span>
-      text <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x4F46;&#x4F60;&#x9EDE;&#x9EDE;&#x770B;&quot;</span>, <span class="hljs-symbol">action:</span> message_action(<span class="hljs-string">&quot;&#x5C31;&#x7B97;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x7167;&#x6A23;&#x53EF;&#x4EE5;&#x89F8;&#x767C; Action&quot;</span>)
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-</code></pre>
-<p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;flex&quot;</span>,
-  <span class="hljs-string">&quot;altText&quot;</span>: <span class="hljs-string">&quot;this is a flex message&quot;</span>,
-  <span class="hljs-string">&quot;contents&quot;</span>: {
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bubble&quot;</span>,
-    <span class="hljs-string">&quot;body&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;box&quot;</span>,
-      <span class="hljs-string">&quot;layout&quot;</span>: <span class="hljs-string">&quot;vertical&quot;</span>,
-      <span class="hljs-string">&quot;contents&quot;</span>: [
-        {
-          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,
-          <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x4F46;&#x4F60;&#x9EDE;&#x9EDE;&#x770B;&quot;</span>,
-          <span class="hljs-string">&quot;action&quot;</span>: {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;message&quot;</span>,
-            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;&#x5C31;&#x7B97;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x7167;&#x6A23;&#x53EF;&#x4EE5;&#x89F8;&#x767C; Action&quot;</span>,
-            <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;&#x5C31;&#x7B97;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x7167;&#x6A23;&#x53EF;&#x4EE5;&#x89F8;&#x767C; Action&quot;</span>
-          }
-        }
-      ]
-    }
-  }
-}
-</code></pre>
-<h2 id="uri-action">URI Action</h2>
-<h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
-<p>URI Action &#x662F;&#x4E00;&#x500B;&#x9EDE;&#x64CA;&#x5F8C;&#x6703;&#x958B;&#x555F;&#x6307;&#x5B9A;&#x7DB2;&#x9801;&#x7684; Action&#xFF0C;&#x95DC;&#x65BC; Action &#x7684;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#action-objects" target="_blank">LINE Flex Message &#x95DC;&#x65BC; Action &#x7684; API Reference</a>&#x3002;</p>
-<h4 id="&#x53EF;&#x7528;&#x7684;&#x5F15;&#x6578;">&#x53EF;&#x7528;&#x7684;&#x5F15;&#x6578;</h4>
-<p><a href="../05_kamiflex.html#&#x5F15;&#x6578;">&#x8AAA;&#x660E;</a></p>
-<ul>
-<li>url (&#x5FC5;&#x586B;)</li>
-<li>label</li>
-<li>altUri.desktop</li>
-</ul>
-<h4 id="&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;">&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;</h4>
-<p><a href="../05_kamiflex.html#&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;">&#x8AAA;&#x660E;</a></p>
-<p>&#x7121;</p>
-<h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
-<p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
-  bubble <span class="hljs-keyword">do</span>
-    body <span class="hljs-keyword">do</span>
-      text <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x4F46;&#x4F60;&#x9EDE;&#x9EDE;&#x770B;&quot;</span>, <span class="hljs-symbol">action:</span> uri_action(<span class="hljs-string">&quot;https://www.kamigo.tw/&quot;</span>)
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-</code></pre>
-<p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;flex&quot;</span>,
-  <span class="hljs-string">&quot;altText&quot;</span>: <span class="hljs-string">&quot;this is a flex message&quot;</span>,
-  <span class="hljs-string">&quot;contents&quot;</span>: {
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bubble&quot;</span>,
-    <span class="hljs-string">&quot;body&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;box&quot;</span>,
-      <span class="hljs-string">&quot;layout&quot;</span>: <span class="hljs-string">&quot;vertical&quot;</span>,
-      <span class="hljs-string">&quot;contents&quot;</span>: [
-        {
-          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,
-          <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x4F46;&#x4F60;&#x9EDE;&#x9EDE;&#x770B;&quot;</span>,
-          <span class="hljs-string">&quot;action&quot;</span>: {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;uri&quot;</span>,
-            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;https://www.kamigo.tw/&quot;</span>,
-            <span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;https://www.kamigo.tw/&quot;</span>
-          }
-        }
-      ]
-    }
-  }
-}
-</code></pre>
-<h2 id="postback-action">Postback Action</h2>
-<h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
-<p>Postback Action &#x662F;&#x4E00;&#x500B;&#x9EDE;&#x64CA;&#x5F8C;&#x6703;&#x50B3;&#x9001;&#x8CC7;&#x6599;(&#x4F7F;&#x7528;&#x8005;&#x770B;&#x4E0D;&#x5230;)&#x7684; Action&#xFF0C;&#x95DC;&#x65BC; Action &#x7684;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#action-objects" target="_blank">LINE Flex Message &#x95DC;&#x65BC; Action &#x7684; API Reference</a>&#x3002;</p>
-<h4 id="&#x53EF;&#x7528;&#x7684;&#x5F15;&#x6578;">&#x53EF;&#x7528;&#x7684;&#x5F15;&#x6578;</h4>
-<p><a href="../05_kamiflex.html#&#x5F15;&#x6578;">&#x8AAA;&#x660E;</a></p>
-<ul>
-<li><p>data (&#x5FC5;&#x586B;)</p>
-<p>  &#x9EDE;&#x64CA;&#x6309;&#x9215;&#x6703;&#x50B3;&#x9001;&#x7684;&#x8CC7;&#x6599;</p>
-</li>
-<li>label</li>
-<li>displayText</li>
-<li><p>text</p>
-<p>  &#x9EDE;&#x64CA;&#x6309;&#x9215;&#x6703;&#x50B3;&#x9001;&#x7684;&#x6587;&#x5B57;</p>
-</li>
-</ul>
-<h4 id="&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;">&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;</h4>
-<p><a href="../05_kamiflex.html#&#x5340;&#x584A;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;">&#x8AAA;&#x660E;</a></p>
-<p>&#x7121;</p>
-<h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
-<p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
-  bubble <span class="hljs-keyword">do</span>
-    body <span class="hljs-keyword">do</span>
-      text <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x4F46;&#x4F60;&#x9EDE;&#x9EDE;&#x770B;&quot;</span>, <span class="hljs-symbol">action:</span> postback_action(<span class="hljs-string">&quot;&#x9019;&#x662F;&#x6A5F;&#x5BC6;&#x8CC7;&#x6599;&#x4F60;&#x770B;&#x4E0D;&#x5230;&quot;</span>, <span class="hljs-symbol">text:</span> <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x8A0A;&#x606F;&#x4F60;&#x770B;&#x5F97;&#x5230;&quot;</span>)
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-</code></pre>
-<p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
-<pre><code class="lang-json">{
-  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;flex&quot;</span>,
-  <span class="hljs-string">&quot;altText&quot;</span>: <span class="hljs-string">&quot;this is a flex message&quot;</span>,
-  <span class="hljs-string">&quot;contents&quot;</span>: {
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bubble&quot;</span>,
-    <span class="hljs-string">&quot;body&quot;</span>: {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;box&quot;</span>,
-      <span class="hljs-string">&quot;layout&quot;</span>: <span class="hljs-string">&quot;vertical&quot;</span>,
-      <span class="hljs-string">&quot;contents&quot;</span>: [
-        {
-          <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,
-          <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x65B9;&#x584A;&#xFF0C;&#x4F46;&#x4F60;&#x9EDE;&#x9EDE;&#x770B;&quot;</span>,
-          <span class="hljs-string">&quot;action&quot;</span>: {
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;postback&quot;</span>,
-            <span class="hljs-string">&quot;data&quot;</span>: <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6A5F;&#x5BC6;&#x8CC7;&#x6599;&#x4F60;&#x770B;&#x4E0D;&#x5230;&quot;</span>,
-            <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;&#x9019;&#x662F;&#x6587;&#x5B57;&#x8A0A;&#x606F;&#x4F60;&#x770B;&#x5F97;&#x5230;&quot;</span>
-          }
-        }
-      ]
-    }
-  }
-}
-</code></pre>
+                                <h1 id="&#x76F8;&#x95DC;&#x5DE5;&#x5177;">&#x76F8;&#x95DC;&#x5DE5;&#x5177;</h1>
+<h2 id="kamiflex-simulator">Kamiflex Simulator</h2>
+<p><a href="https://kamiflex.etrex.tw/" target="_blank">&#x76F8;&#x95DC;&#x9023;&#x7D50;</a></p>
+<h2 id="line-simulator">Line Simulator</h2>
+<p><a href="https://developers.line.biz/flex-simulator/?status=success" target="_blank">&#x76F8;&#x95DC;&#x9023;&#x7D50;</a></p>
+<h2 id="&#x8F14;&#x52A9;&#x958B;&#x767C;-line-flex-&#x8A0A;&#x606F;&#x7684;&#x5DE5;&#x5177;">&#x8F14;&#x52A9;&#x958B;&#x767C; LINE Flex &#x8A0A;&#x606F;&#x7684;&#x5DE5;&#x5177;</h2>
+<h3 id="&#x5E1D;&#x9738;&#x72D7;">&#x5E1D;&#x9738;&#x72D7;</h3>
+<p><a href="https://qr-official.line.me/sid/M/jat1061y.png" target="_blank">&#x76F8;&#x95DC;&#x9023;&#x7D50;</a></p>
+<h3 id="flex-&#x958B;&#x767C;&#x4EBA;&#x54E1;&#x5DE5;&#x5177;">Flex &#x958B;&#x767C;&#x4EBA;&#x54E1;&#x5DE5;&#x5177;</h3>
+<p><a href="https://taichunmin.idv.tw/blog/2020-04-06-line-devbot.html" target="_blank">&#x76F8;&#x95DC;&#x9023;&#x7D50;</a></p>
 
                                 
                                 </section>
@@ -850,12 +711,12 @@
 
             
                 
-                <a href="basic_element.html#postback-text-button" class="navigation navigation-prev " aria-label="Previous page: Postback Text Button">
+                <a href="showcase.html" class="navigation navigation-prev " aria-label="Previous page: Showcase">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="action.html#message-action" class="navigation navigation-next " aria-label="Next page: Message Action">
+                <a href="../06_form.html" class="navigation navigation-next " aria-label="Next page: Form 的使用說明">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -866,7 +727,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"點擊事件","level":"1.6.5","depth":2,"next":{"title":"Message Action","level":"1.6.5.1","depth":3,"anchor":"#message-action","path":"kamiflex/action.md","ref":"kamiflex/action.md#message-action","articles":[]},"previous":{"title":"Postback Text Button","level":"1.6.4.9","depth":3,"anchor":"#postback-text-button","path":"kamiflex/basic_element.md","ref":"kamiflex/basic_element.md#postback-text-button","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"kamiflex/action.md","mtime":"2021-06-11T03:50:29.225Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-11T03:54:27.650Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"相關工具","level":"1.6.7","depth":2,"next":{"title":"Form 的使用說明","level":"1.7","depth":1,"path":"06_form.md","ref":"06_form.md","articles":[]},"previous":{"title":"Showcase","level":"1.6.6","depth":2,"path":"kamiflex/showcase.md","ref":"kamiflex/showcase.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"kamiflex/tools.md","mtime":"2021-06-11T03:51:21.515Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-11T03:54:27.650Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
