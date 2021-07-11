@@ -33,13 +33,15 @@
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+json = Kamiflex.json(self) do
   bubble size: "nano",direction: "ltr" do
     body do
       text "Hello, World!"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -92,24 +94,34 @@ end
 #### 使用範例
 使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
-Kamiflex.hash(self) do
+strings = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Hello, World!"
+]
+
+json = Kamiflex.json(self) do
   carousel do
-  bubbles strings do |string|
-    body layout: "horizontal" do
-      text string,wrap: true
+    bubbles strings do |string|
+      body layout: "horizontal" do
+        text string,wrap: true
+      end
+      footer layout: "horizontal" do
+        url_button "Go","https://example.com",style: "primary"
+      end
     end
-    footer layout: "horizontal" do
-      url_button "Go","https://example.com",style: "primary"
-    end
-  end
   end
 end
+
+puts json
 ```
 不使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
-Kamiflex.hash(self) do
+strings = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Hello, World!"
+]
+
+json = Kamiflex.json(self) do
   carousel do
     strings.each do |string|
       bubble do
@@ -123,6 +135,8 @@ Kamiflex.hash(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -211,30 +225,40 @@ end
 
 - [bubble](#bubble)
 - [bubbles](#bubbles)
-  
+
 > 最多12個 bubble
 
 #### 使用範例
 使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
-Kamiflex.hash(self) do
+strings = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Hello, World!"
+]
+
+json = Kamiflex.json(self) do
   carousel do
-  bubbles strings do |string|
-    body layout: "horizontal" do
-      text string,wrap: true
+    bubbles strings do |string|
+      body layout: "horizontal" do
+        text string,wrap: true
+      end
+      footer layout: "horizontal" do
+        url_button "Go","https://example.com",style: "primary"
+      end
     end
-    footer layout: "horizontal" do
-      url_button "Go","https://example.com",style: "primary"
-    end
-  end
   end
 end
+
+puts json
 ```
 不使用 `bubbles` 的 Ruby 寫法：
 ```ruby
-strings = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","Hello, World!"]
-Kamiflex.hash(self) do
+strings = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Hello, World!"
+]
+
+json = Kamiflex.json(self) do
   carousel do
     strings.each do |string|
       bubble do
@@ -248,6 +272,8 @@ Kamiflex.hash(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -324,7 +350,7 @@ end
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 的最頂部，一般用來放置標題使用。
 
-Kamflex 會為 header 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
+Kamflex 會為 header 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
 > 此處無法直接修飾 header 的 style，若想修飾 header 的 style 請使用 [styles](#styles)
 
 #### 可用的引數
@@ -370,13 +396,15 @@ end
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+json = Kamiflex.json(self) do
   bubble do
     header layout: "vertical", borderWidth: "light", backgroundColor: "#c3c3c3" do
       text "hello, wrold!"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -437,12 +465,13 @@ kamiflex 預設 hero 的 type 為 Image 元件，相關引述請搭配 [LINE Fle
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
-    bubble do
-        hero "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
-size: :full, aspectRatio: "20:13"
-    end
+json = Kamiflex.json(self) do
+  bubble do
+    hero "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png", size: :full, aspectRatio: "20:13"
+  end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -466,7 +495,7 @@ end
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於表達內文。
 
-Kamflex 會為 body 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)
+Kamflex 會為 body 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)
 > 此處無法直接修飾 body 的 style，若想修飾 body 的 style 請使用 [styles](#styles)
 
 #### 可用的引數
@@ -512,13 +541,15 @@ end
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+json = Kamiflex.json(self) do
   bubble do
     body layout: "vertical", borderWidth: "light", backgroundColor: "#c3c3c3" do
       text "hello, wrold!"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -548,7 +579,7 @@ end
 #### 說明
 需放置在 [bubble](#bubble) 或是 [bubbles](#bubbles) 的 `do ... end` 之中。呈現在 Flex Message 中間的位置，一般用於放置按鈕。
 
-Kamflex 會為 footer 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)
+Kamflex 會為 footer 自動創立一個容器元件 box，關於容器元件 box 引數請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)
 > 此處無法直接修飾 footer 的 style，若想修飾 footer 的 style 請使用 [styles](#styles)
 
 #### 可用的引數
@@ -594,13 +625,15 @@ end
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+json = Kamiflex.json(self) do
   bubble do
     footer layout: "vertical", borderWidth: "light", backgroundColor: "#c3c3c3" do
       text "hello, wrold!"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -624,7 +657,7 @@ end
   }
 }
 ```
-    
+
 ## Styles
 #### 說明
 主要功能為修飾 [header](#header)、[hero](#hero)、[body](#body)、[footer](#footer) 的style。
@@ -643,39 +676,41 @@ end
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
+json = Kamiflex.json(self) do
   bubble size: "mega" do
     header do
       text "Kamiflex"
     end
     hero "https://stickershop.line-scdn.net/stickershop/v1/product/1500785/LINEStorePC/main.png;compress=true"
     body do
-      text "用kamiflex就是這麼簡單",wrap: true
+      text "用kamiflex就是這麼簡單",wrap: true
     end
     footer do
       message_button "同意", "不只好用還好潮！真的讚！"
     end
-    styles ({ header: {
-             backgroundColor: "#ffffff",
-             separator: true,
-             separatorColor: "#c2c2c2",
-           },
-             hero: {
-             separator: true,
-             separatorColor: "#c2c2c2",
-           },
-             body: {
-             backgroundColor: "#ffffff",
-             separator: true,
-             separatorColor: "#c2c2c2",
-           },
-             footer: {
-             backgroundColor: "#ffffff",
-             separator: true,
-             separatorColor: "#c2c2c2",
-           } })
+    styles header: {
+        backgroundColor: "#ffffff",
+        separator: true,
+        separatorColor: "#c2c2c2",
+      },
+      hero: {
+        separator: true,
+        separatorColor: "#c2c2c2",
+      },
+      body: {
+        backgroundColor: "#ffffff",
+        separator: true,
+        separatorColor: "#c2c2c2",
+      },
+      footer: {
+        backgroundColor: "#ffffff",
+        separator: true,
+        separatorColor: "#c2c2c2",
+      }
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json

@@ -1,4 +1,4 @@
-# Showcase
+# Showcase
 ## Recipe
 [程式碼連結](https://github.com/etrex/kamiflex/blob/master/example/show_cases/recipe.rb)
 ## Restaurant

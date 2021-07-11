@@ -20,13 +20,15 @@ Message Action 是一個點擊後會傳送文字的 Action，關於 Action 的�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       text "這是文字方塊，但你點點看", action: message_action("就算是文字方塊，照樣可以觸發 Action")
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -73,13 +75,15 @@ URI Action 是一個點擊後會開啟指定網頁的 Action，關於 Action 的
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       text "這是文字方塊，但你點點看", action: uri_action("https://www.kamigo.tw/")
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -131,13 +135,15 @@ Postback Action 是一個點擊後會傳送資料(使用者看不到)的 Action�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       text "這是文字方塊，但你點點看", action: postback_action("這是機密資料你看不到", text: "這是文字訊息你看得到")
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json

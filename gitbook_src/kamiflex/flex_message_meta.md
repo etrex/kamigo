@@ -1,17 +1,19 @@
 # Flex Message Meta
 Flex Message Meta是每一個Flex Message一定會包含的部分，其Json為
 ```json
- {
-    type: "flex",
-    altText: "this is a flex message",
-    contents: {...}
+{
+  "type": "flex",
+  "altText": "this is a flex message",
+  "contents": {...}
 }
 ```
 對應的`Kamiflex`程式碼為
 ```ruby
-Kamiflex.build(self) do
-    ...
+json = Kamiflex.json(self) do
+  ...
 end
+
+puts json
 ```
 Kamiflex 會將該程式碼轉換為JSON，`do...end`為block，可以在其中放入 [核心元件](/kamiflex/core.md)。
 ## Class Method
@@ -19,7 +21,7 @@ Kamiflex 會將該程式碼轉換為JSON，`do...end`為block，可以在其中�
 
 - .hash
 
-  使用 `Kamiflex.hash` 會傳回 Hash。
+  使用 `Kamiflex.hash` 會傳回 Hash。
 - .json
 
   使用 `Kamiflex.json` 會傳回 JSON。
@@ -36,16 +38,18 @@ Kamiflex 會將該程式碼轉換為JSON，`do...end`為block，可以在其中�
 - alt_text
 
 #### 使用範例
-Ruby 寫法：
+Ruby 寫法：
 ```ruby
-Kamiflex.build(self) do
-    alt_text "test alt text"
-    bubble do
-      body do
-        text "Hello, World!"
-      end
+json = Kamiflex.json(self) do
+  alt_text "test alt text"
+  bubble do
+    body do
+      text "Hello, World!"
     end
+  end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json

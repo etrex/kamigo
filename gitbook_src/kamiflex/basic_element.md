@@ -35,13 +35,15 @@ Text 是用來放置文字的元件，關於 Text 的說明請參考官方文件
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       text "Hello, World!", color:"#ff0000"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -97,13 +99,15 @@ Image 是用來放置圖片的元件，關於 Image 的說明請參考官方文�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       image "https://www.kamigo.tw/assets/kamigo-c3b10dff4cdb60fa447496b22edad6c32fffde96de20262efba690892e4461e8.png"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -152,7 +156,7 @@ Icon 僅能放置在 [baseline_box](/kamiflex/container.md#baseline_box) 中，�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body layout: "baseline" do
       icon "https://www.kamigo.tw/assets/kamigo-c3b10dff4cdb60fa447496b22edad6c32fffde96de20262efba690892e4461e8.png"
@@ -160,6 +164,8 @@ Kamiflex.json(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -206,7 +212,7 @@ Separator 是一個分隔線元件，關於 Separator 的說明請參考官方�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       text "牛郎"
@@ -215,6 +221,8 @@ Kamiflex.json(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -264,7 +272,7 @@ Filler 是一個空白元件，關於 Filler 的說明請參考官方文件中�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       text "Hello"
@@ -273,6 +281,8 @@ Kamiflex.json(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -337,13 +347,15 @@ Message Button 是點擊後會傳送文字的 Button，關於 Button 的說明�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       message_button "這是一個 Message Button", "傳送的文字", style: "primary"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -406,13 +418,15 @@ URL Button 是點擊後會開啟指定網頁的 Button，關於 Button 的說明
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       url_button "這是一個 URL Button", "https://www.kamigo.tw/", style: "primary"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -475,13 +489,15 @@ Postback Button 是點擊後會傳送特定資料(使用者看不到)的 Button�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       postback_button "這是一個 Postback Button", "這是機密資料你看不到", style: "primary"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -547,13 +563,15 @@ Postback Text Button 是點擊後會傳送特定資料(使用者看不到)和傳
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body flex: 10 do
       postback_text_button "這是 Postback Text Button", "這是文字訊息你看得到", "這是機密資料你看不到", style: "primary"
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json

@@ -1,5 +1,5 @@
 # 容器元件
-容器元件需被放置在 [header](/kamiflex/core.md#header)、[body](/kamiflex/core.md#body) 或 [footer](/kamiflex/core.md#footer) 的 `do ... end` 之中。 
+容器元件需被放置在 [header](/kamiflex/core.md#header)、[body](/kamiflex/core.md#body) 或 [footer](/kamiflex/core.md#footer) 的 `do ... end` 之中。
 ## Horizontal Box
 #### 說明
 Kamiflex 會為 Horizontal Box 新增一個 box，並且將該 box 的 layout 引數設成 horizontal，關於 box 的說明請參考官方文件中的 [LINE Flex Message 關於 BOX 的 API Reference](https://developers.line.biz/en/reference/messaging-api/#box)。
@@ -47,7 +47,7 @@ Kamiflex 會為 Horizontal Box 新增一個 box，並且將該 box 的 layout �
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.hash(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       horizontal_box backgroundColor: "#f2f2f2",cornerRadius: "20px" do
@@ -57,6 +57,8 @@ Kamiflex.hash(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -144,7 +146,7 @@ Kamiflex 會為 Vertical Box 新增一個 box，並且將該 box 的 layout 引�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       vertical_box backgroundColor: "#f2f2f2",cornerRadius: "20px" do
@@ -154,6 +156,8 @@ Kamiflex.json(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
@@ -243,7 +247,7 @@ Kamiflex 會為 Baseline Box 新增一個 box，並且將該 box 的 layout 引�
 #### 使用範例
 Ruby 寫法：
 ```ruby
-Kamiflex.json(self) do
+json = Kamiflex.json(self) do
   bubble do
     body do
       baseline_box backgroundColor: "#f2f2f2",cornerRadius: "20px" do
@@ -253,6 +257,8 @@ Kamiflex.json(self) do
     end
   end
 end
+
+puts json
 ```
 對應的 JSON：
 ```json
