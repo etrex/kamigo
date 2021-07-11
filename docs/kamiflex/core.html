@@ -706,13 +706,15 @@
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.build(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-symbol">size:</span> <span class="hljs-string">&quot;nano&quot;</span>,<span class="hljs-symbol">direction:</span> <span class="hljs-string">&quot;ltr&quot;</span> <span class="hljs-keyword">do</span>
     body <span class="hljs-keyword">do</span>
       text <span class="hljs-string">&quot;Hello, World!&quot;</span>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -761,23 +763,33 @@
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>&#x4F7F;&#x7528; <code>bubbles</code> &#x7684; Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">strings = [<span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,<span class="hljs-string">&quot;Hello, World!&quot;</span>]
-Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">strings = [
+  <span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,
+  <span class="hljs-string">&quot;Hello, World!&quot;</span>
+]
+
+json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   carousel <span class="hljs-keyword">do</span>
-  bubbles strings <span class="hljs-keyword">do</span> |string|
-    body <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
-      text string,<span class="hljs-symbol">wrap:</span> <span class="hljs-keyword">true</span>
+    bubbles strings <span class="hljs-keyword">do</span> |string|
+      body <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
+        text string,<span class="hljs-symbol">wrap:</span> <span class="hljs-keyword">true</span>
+      <span class="hljs-keyword">end</span>
+      footer <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
+        url_button <span class="hljs-string">&quot;Go&quot;</span>,<span class="hljs-string">&quot;https://example.com&quot;</span>,<span class="hljs-symbol">style:</span> <span class="hljs-string">&quot;primary&quot;</span>
+      <span class="hljs-keyword">end</span>
     <span class="hljs-keyword">end</span>
-    footer <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
-      url_button <span class="hljs-string">&quot;Go&quot;</span>,<span class="hljs-string">&quot;https://example.com&quot;</span>,<span class="hljs-symbol">style:</span> <span class="hljs-string">&quot;primary&quot;</span>
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x4E0D;&#x4F7F;&#x7528; <code>bubbles</code> &#x7684; Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">strings = [<span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,<span class="hljs-string">&quot;Hello, World!&quot;</span>]
-Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">strings = [
+  <span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,
+  <span class="hljs-string">&quot;Hello, World!&quot;</span>
+]
+
+json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   carousel <span class="hljs-keyword">do</span>
     strings.each <span class="hljs-keyword">do</span> |string|
       bubble <span class="hljs-keyword">do</span>
@@ -791,6 +803,8 @@ Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword"
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -881,23 +895,33 @@ Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword"
 </blockquote>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>&#x4F7F;&#x7528; <code>bubbles</code> &#x7684; Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">strings = [<span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,<span class="hljs-string">&quot;Hello, World!&quot;</span>]
-Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">strings = [
+  <span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,
+  <span class="hljs-string">&quot;Hello, World!&quot;</span>
+]
+
+json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   carousel <span class="hljs-keyword">do</span>
-  bubbles strings <span class="hljs-keyword">do</span> |string|
-    body <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
-      text string,<span class="hljs-symbol">wrap:</span> <span class="hljs-keyword">true</span>
+    bubbles strings <span class="hljs-keyword">do</span> |string|
+      body <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
+        text string,<span class="hljs-symbol">wrap:</span> <span class="hljs-keyword">true</span>
+      <span class="hljs-keyword">end</span>
+      footer <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
+        url_button <span class="hljs-string">&quot;Go&quot;</span>,<span class="hljs-string">&quot;https://example.com&quot;</span>,<span class="hljs-symbol">style:</span> <span class="hljs-string">&quot;primary&quot;</span>
+      <span class="hljs-keyword">end</span>
     <span class="hljs-keyword">end</span>
-    footer <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;horizontal&quot;</span> <span class="hljs-keyword">do</span>
-      url_button <span class="hljs-string">&quot;Go&quot;</span>,<span class="hljs-string">&quot;https://example.com&quot;</span>,<span class="hljs-symbol">style:</span> <span class="hljs-string">&quot;primary&quot;</span>
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x4E0D;&#x4F7F;&#x7528; <code>bubbles</code> &#x7684; Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">strings = [<span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,<span class="hljs-string">&quot;Hello, World!&quot;</span>]
-Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">strings = [
+  <span class="hljs-string">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;</span>,
+  <span class="hljs-string">&quot;Hello, World!&quot;</span>
+]
+
+json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   carousel <span class="hljs-keyword">do</span>
     strings.each <span class="hljs-keyword">do</span> |string|
       bubble <span class="hljs-keyword">do</span>
@@ -911,6 +935,8 @@ Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword"
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -984,7 +1010,7 @@ Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword"
 <h2 id="header">Header</h2>
 <h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
 <p>&#x9700;&#x653E;&#x7F6E;&#x5728; <a href="#bubble">bubble</a> &#x6216;&#x662F; <a href="#bubbles">bubbles</a> &#x7684; <code>do ... end</code> &#x4E4B;&#x4E2D;&#x3002;&#x5448;&#x73FE;&#x5728; Flex Message &#x7684;&#x6700;&#x9802;&#x90E8;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x4F86;&#x653E;&#x7F6E;&#x6A19;&#x984C;&#x4F7F;&#x7528;&#x3002;</p>
-<p>Kamflex &#x6703;&#x70BA; header &#x81EA;&#x52D5;&#x5275;&#x7ACB;&#x4E00;&#x500B;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box&#xFF0C;&#x95DC;&#x65BC;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box &#x5F15;&#x6578;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a>&#x3002;</p>
+<p>Kamflex &#x6703;&#x70BA; header &#x81EA;&#x52D5;&#x5275;&#x7ACB;&#x4E00;&#x500B;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box&#xFF0C;&#x95DC;&#x65BC;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box &#x5F15;&#x6578;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a>&#x3002;</p>
 <blockquote>
 <p>&#x6B64;&#x8655;&#x7121;&#x6CD5;&#x76F4;&#x63A5;&#x4FEE;&#x98FE; header &#x7684; style&#xFF0C;&#x82E5;&#x60F3;&#x4FEE;&#x98FE; header &#x7684; style &#x8ACB;&#x4F7F;&#x7528; <a href="#styles">styles</a></p>
 </blockquote>
@@ -1029,13 +1055,15 @@ Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword"
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.build(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-keyword">do</span>
     header <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;vertical&quot;</span>, <span class="hljs-symbol">borderWidth:</span> <span class="hljs-string">&quot;light&quot;</span>, <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#c3c3c3&quot;</span> <span class="hljs-keyword">do</span>
       text <span class="hljs-string">&quot;hello, wrold!&quot;</span>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -1091,12 +1119,13 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
 <p>&#x7121;</p>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.build(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
-    bubble <span class="hljs-keyword">do</span>
-        hero <span class="hljs-string">&quot;https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png&quot;</span>,
-<span class="hljs-symbol">size:</span> <span class="hljs-symbol">:full</span>, <span class="hljs-symbol">aspectRatio:</span> <span class="hljs-string">&quot;20:13&quot;</span>
-    <span class="hljs-keyword">end</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+  bubble <span class="hljs-keyword">do</span>
+    hero <span class="hljs-string">&quot;https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png&quot;</span>, <span class="hljs-symbol">size:</span> <span class="hljs-symbol">:full</span>, <span class="hljs-symbol">aspectRatio:</span> <span class="hljs-string">&quot;20:13&quot;</span>
+  <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -1116,7 +1145,7 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
 <h2 id="body">Body</h2>
 <h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
 <p>&#x9700;&#x653E;&#x7F6E;&#x5728; <a href="#bubble">bubble</a> &#x6216;&#x662F; <a href="#bubbles">bubbles</a> &#x7684; <code>do ... end</code> &#x4E4B;&#x4E2D;&#x3002;&#x5448;&#x73FE;&#x5728; Flex Message &#x4E2D;&#x9593;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x65BC;&#x8868;&#x9054;&#x5167;&#x6587;&#x3002;</p>
-<p>Kamflex &#x6703;&#x70BA; body &#x81EA;&#x52D5;&#x5275;&#x7ACB;&#x4E00;&#x500B;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box&#xFF0C;&#x95DC;&#x65BC;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box &#x5F15;&#x6578;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a></p>
+<p>Kamflex &#x6703;&#x70BA; body &#x81EA;&#x52D5;&#x5275;&#x7ACB;&#x4E00;&#x500B;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box&#xFF0C;&#x95DC;&#x65BC;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box &#x5F15;&#x6578;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a></p>
 <blockquote>
 <p>&#x6B64;&#x8655;&#x7121;&#x6CD5;&#x76F4;&#x63A5;&#x4FEE;&#x98FE; body &#x7684; style&#xFF0C;&#x82E5;&#x60F3;&#x4FEE;&#x98FE; body &#x7684; style &#x8ACB;&#x4F7F;&#x7528; <a href="#styles">styles</a></p>
 </blockquote>
@@ -1161,13 +1190,15 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.build(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-keyword">do</span>
     body <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;vertical&quot;</span>, <span class="hljs-symbol">borderWidth:</span> <span class="hljs-string">&quot;light&quot;</span>, <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#c3c3c3&quot;</span> <span class="hljs-keyword">do</span>
       text <span class="hljs-string">&quot;hello, wrold!&quot;</span>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -1193,7 +1224,7 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
 <h2 id="footer">Footer</h2>
 <h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
 <p>&#x9700;&#x653E;&#x7F6E;&#x5728; <a href="#bubble">bubble</a> &#x6216;&#x662F; <a href="#bubbles">bubbles</a> &#x7684; <code>do ... end</code> &#x4E4B;&#x4E2D;&#x3002;&#x5448;&#x73FE;&#x5728; Flex Message &#x4E2D;&#x9593;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x65BC;&#x653E;&#x7F6E;&#x6309;&#x9215;&#x3002;</p>
-<p>Kamflex &#x6703;&#x70BA; footer &#x81EA;&#x52D5;&#x5275;&#x7ACB;&#x4E00;&#x500B;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box&#xFF0C;&#x95DC;&#x65BC;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box &#x5F15;&#x6578;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a></p>
+<p>Kamflex &#x6703;&#x70BA; footer &#x81EA;&#x52D5;&#x5275;&#x7ACB;&#x4E00;&#x500B;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box&#xFF0C;&#x95DC;&#x65BC;&#x5BB9;&#x5668;&#x5143;&#x4EF6; box &#x5F15;&#x6578;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a></p>
 <blockquote>
 <p>&#x6B64;&#x8655;&#x7121;&#x6CD5;&#x76F4;&#x63A5;&#x4FEE;&#x98FE; footer &#x7684; style&#xFF0C;&#x82E5;&#x60F3;&#x4FEE;&#x98FE; footer &#x7684; style &#x8ACB;&#x4F7F;&#x7528; <a href="#styles">styles</a></p>
 </blockquote>
@@ -1238,13 +1269,15 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.build(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-keyword">do</span>
     footer <span class="hljs-symbol">layout:</span> <span class="hljs-string">&quot;vertical&quot;</span>, <span class="hljs-symbol">borderWidth:</span> <span class="hljs-string">&quot;light&quot;</span>, <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#c3c3c3&quot;</span> <span class="hljs-keyword">do</span>
       text <span class="hljs-string">&quot;hello, wrold!&quot;</span>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -1279,39 +1312,41 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
 <p>&#x7121;</p>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.build(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-symbol">size:</span> <span class="hljs-string">&quot;mega&quot;</span> <span class="hljs-keyword">do</span>
     header <span class="hljs-keyword">do</span>
       text <span class="hljs-string">&quot;Kamiflex&quot;</span>
     <span class="hljs-keyword">end</span>
     hero <span class="hljs-string">&quot;https://stickershop.line-scdn.net/stickershop/v1/product/1500785/LINEStorePC/main.png;compress=true&quot;</span>
     body <span class="hljs-keyword">do</span>
-      text <span class="hljs-string">&quot;&#x7528;kamiflex&#x5C31;&#x662F;&#x9019;&#x9EBC;&#x7C21;&#x55AE;&quot;</span>,<span class="hljs-symbol">wrap:</span> <span class="hljs-keyword">true</span>
+      text <span class="hljs-string">&quot;&#x7528;kamiflex&#x5C31;&#x662F;&#x9019;&#x9EBC;&#x7C21;&#x55AE;&quot;</span>,<span class="hljs-symbol">wrap:</span> <span class="hljs-keyword">true</span>
     <span class="hljs-keyword">end</span>
     footer <span class="hljs-keyword">do</span>
       message_button <span class="hljs-string">&quot;&#x540C;&#x610F;&quot;</span>, <span class="hljs-string">&quot;&#x4E0D;&#x53EA;&#x597D;&#x7528;&#x9084;&#x597D;&#x6F6E;&#xFF01;&#x771F;&#x7684;&#x8B9A;&#xFF01;&quot;</span>
     <span class="hljs-keyword">end</span>
-    styles ({ <span class="hljs-symbol">header:</span> {
-             <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#ffffff&quot;</span>,
-             <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
-             <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
-           },
-             <span class="hljs-symbol">hero:</span> {
-             <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
-             <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
-           },
-             <span class="hljs-symbol">body:</span> {
-             <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#ffffff&quot;</span>,
-             <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
-             <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
-           },
-             <span class="hljs-symbol">footer:</span> {
-             <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#ffffff&quot;</span>,
-             <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
-             <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
-           } })
+    styles <span class="hljs-symbol">header:</span> {
+        <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#ffffff&quot;</span>,
+        <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
+        <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
+      },
+      <span class="hljs-symbol">hero:</span> {
+        <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
+        <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
+      },
+      <span class="hljs-symbol">body:</span> {
+        <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#ffffff&quot;</span>,
+        <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
+        <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
+      },
+      <span class="hljs-symbol">footer:</span> {
+        <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#ffffff&quot;</span>,
+        <span class="hljs-symbol">separator:</span> <span class="hljs-keyword">true</span>,
+        <span class="hljs-symbol">separatorColor:</span> <span class="hljs-string">&quot;#c2c2c2&quot;</span>,
+      }
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -1426,7 +1461,7 @@ hero &#x7684; type &#x9664;&#x4E86; image &#x5143;&#x4EF6;&#x5916;&#xFF0C;&#x4E5
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"核心元件","level":"1.6.2","depth":2,"next":{"title":"Bubble","level":"1.6.2.1","depth":3,"anchor":"#bubble","path":"kamiflex/core.md","ref":"kamiflex/core.md#bubble","articles":[]},"previous":{"title":"Flex Message Meta","level":"1.6.1","depth":2,"path":"kamiflex/flex_message_meta.md","ref":"kamiflex/flex_message_meta.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"kamiflex/core.md","mtime":"2021-06-07T10:04:34.127Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-11T03:54:27.650Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"核心元件","level":"1.6.2","depth":2,"next":{"title":"Bubble","level":"1.6.2.1","depth":3,"anchor":"#bubble","path":"kamiflex/core.md","ref":"kamiflex/core.md#bubble","articles":[]},"previous":{"title":"Flex Message Meta","level":"1.6.1","depth":2,"path":"kamiflex/flex_message_meta.md","ref":"kamiflex/flex_message_meta.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"kamiflex/core.md","mtime":"2021-07-11T10:07:24.510Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-11T10:12:09.512Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

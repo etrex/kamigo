@@ -675,7 +675,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="&#x5BB9;&#x5668;&#x5143;&#x4EF6;">&#x5BB9;&#x5668;&#x5143;&#x4EF6;</h1>
-<p>&#x5BB9;&#x5668;&#x5143;&#x4EF6;&#x9700;&#x88AB;&#x653E;&#x7F6E;&#x5728; <a href="core.html#header">header</a>&#x3001;<a href="core.html#body">body</a> &#x6216; <a href="core.html#footer">footer</a> &#x7684; <code>do ... end</code> &#x4E4B;&#x4E2D;&#x3002; </p>
+<p>&#x5BB9;&#x5668;&#x5143;&#x4EF6;&#x9700;&#x88AB;&#x653E;&#x7F6E;&#x5728; <a href="core.html#header">header</a>&#x3001;<a href="core.html#body">body</a> &#x6216; <a href="core.html#footer">footer</a> &#x7684; <code>do ... end</code> &#x4E4B;&#x4E2D;&#x3002;</p>
 <h2 id="horizontal-box">Horizontal Box</h2>
 <h4 id="&#x8AAA;&#x660E;">&#x8AAA;&#x660E;</h4>
 <p>Kamiflex &#x6703;&#x70BA; Horizontal Box &#x65B0;&#x589E;&#x4E00;&#x500B; box&#xFF0C;&#x4E26;&#x4E14;&#x5C07;&#x8A72; box &#x7684; layout &#x5F15;&#x6578;&#x8A2D;&#x6210; horizontal&#xFF0C;&#x95DC;&#x65BC; box &#x7684;&#x8AAA;&#x660E;&#x8ACB;&#x53C3;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <a href="https://developers.line.biz/en/reference/messaging-api/#box" target="_blank">LINE Flex Message &#x95DC;&#x65BC; BOX &#x7684; API Reference</a>&#x3002;</p>
@@ -720,7 +720,7 @@
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.hash(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-keyword">do</span>
     body <span class="hljs-keyword">do</span>
       horizontal_box <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#f2f2f2&quot;</span>,<span class="hljs-symbol">cornerRadius:</span> <span class="hljs-string">&quot;20px&quot;</span> <span class="hljs-keyword">do</span>
@@ -730,6 +730,8 @@
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -812,7 +814,7 @@
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-keyword">do</span>
     body <span class="hljs-keyword">do</span>
       vertical_box <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#f2f2f2&quot;</span>,<span class="hljs-symbol">cornerRadius:</span> <span class="hljs-string">&quot;20px&quot;</span> <span class="hljs-keyword">do</span>
@@ -822,6 +824,8 @@
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -905,7 +909,7 @@
 </ul>
 <h4 id="&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;">&#x4F7F;&#x7528;&#x7BC4;&#x4F8B;</h4>
 <p>Ruby &#x5BEB;&#x6CD5;&#xFF1A;</p>
-<pre><code class="lang-ruby">Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
+<pre><code class="lang-ruby">json = Kamiflex.json(<span class="hljs-keyword">self</span>) <span class="hljs-keyword">do</span>
   bubble <span class="hljs-keyword">do</span>
     body <span class="hljs-keyword">do</span>
       baseline_box <span class="hljs-symbol">backgroundColor:</span> <span class="hljs-string">&quot;#f2f2f2&quot;</span>,<span class="hljs-symbol">cornerRadius:</span> <span class="hljs-string">&quot;20px&quot;</span> <span class="hljs-keyword">do</span>
@@ -915,6 +919,8 @@
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
+
+puts json
 </code></pre>
 <p>&#x5C0D;&#x61C9;&#x7684; JSON&#xFF1A;</p>
 <pre><code class="lang-json">{
@@ -996,7 +1002,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"容器元件","level":"1.6.3","depth":2,"next":{"title":"Horizontal Box","level":"1.6.3.1","depth":3,"anchor":"#horizontal-box","path":"kamiflex/container.md","ref":"kamiflex/container.md#horizontal-box","articles":[]},"previous":{"title":"Styles","level":"1.6.2.8","depth":3,"anchor":"#styles","path":"kamiflex/core.md","ref":"kamiflex/core.md#styles","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"kamiflex/container.md","mtime":"2021-06-07T10:04:34.127Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-11T03:54:27.650Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"容器元件","level":"1.6.3","depth":2,"next":{"title":"Horizontal Box","level":"1.6.3.1","depth":3,"anchor":"#horizontal-box","path":"kamiflex/container.md","ref":"kamiflex/container.md#horizontal-box","articles":[]},"previous":{"title":"Styles","level":"1.6.2.8","depth":3,"anchor":"#styles","path":"kamiflex/core.md","ref":"kamiflex/core.md#styles","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","search-pro","back-to-top-button","chapter-fold","copy-code-button","advanced-emoji","splitter"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"copy-code-button":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"kamiflex/container.md","mtime":"2021-07-11T09:58:15.190Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-11T10:12:09.512Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
