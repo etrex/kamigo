@@ -1,6 +1,6 @@
 require 'uri'
 
-class LineController < ApplicationController
+class LineController < ActionController::Base
   protect_from_forgery with: :null_session
 
   def entry
