@@ -137,11 +137,11 @@ Kamigo 預設使用基本的語意理解模型，會將使用者輸入視為在�
 
 # 使用 kamigo 製作的聊天機器人
 - [kamigo demo](https://github.com/etrex/kamigo_demo)
-  <p><img width="100" height="100" src="/doc/images/kamigo_demo_qrcode.png"></p>
+  <p><img width="100" height="100" src="/docs/images/kamigo_demo_qrcode.png"></p>
 - [健身紀錄機器人: Muscle-Man](https://github.com/louis70109/muscle_man)
   <p><img width="100" height="100" src="https://camo.githubusercontent.com/b8c51b15b20b159d356245277d079c04482acc01/68747470733a2f2f692e696d6775722e636f6d2f7534547675676e2e706e67"></p>
 - 守護寵物機器人
-  <p><img width="100" height="100" src="/doc/images/pet_loved_qrcode.png"></p>
+  <p><img width="100" height="100" src="/docs/images/pet_loved_qrcode.png"></p>
 
 # 計畫
 - 提供多種語意理解模型串接
