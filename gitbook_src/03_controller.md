@@ -1,6 +1,6 @@
 # Controller 的使用說明
 
-在 controller 當中你可以取得幾個重要的 params:
+以下是在 controller 當中你可以取得的所有 params:
 
 ## platform_type
 
