@@ -11,7 +11,7 @@ Kamigo 目前僅支援 LINE，因此 platform_type 的值會是 "line"。
 你可以使用以下程式碼取得 platform_type:
 
 ```ruby
-params[:platform_type]
+platform_type = params.dig(:platform_type)
 ```
 
 ## source_type
@@ -21,7 +21,7 @@ source_type 表示目前的 Request 是來自於那一種對話框，其可能�
 你可以使用以下程式碼取得 source_type:
 
 ```ruby
-params.dig(:source_type)
+source_type = params.dig(:source_type)
 ```
 
 ## source_group_id
@@ -35,7 +35,7 @@ source_group_id 表示目前 Request 是來自於哪一個對話框。
 你可以使用以下程式碼取得 source_group_id:
 
 ```ruby
-params.dig(:source_group_id)
+source_group_id = params.dig(:source_group_id)
 ```
 
 ## source_user_id
@@ -49,7 +49,7 @@ source_user_id 會與 LINE 提供的 userId 相等。
 你可以使用以下程式碼取得 source_user_id:
 
 ```ruby
-params.dig(:source_user_id)
+source_user_id = params.dig(:source_user_id)
 ```
 
 ## message_type
@@ -63,7 +63,7 @@ message_type 與 LINE 提供的 message.type 相等。
 你可以使用以下程式碼取得 message_type:
 
 ```ruby
-params.dig(:message_type)
+message_type = params.dig(:message_type)
 ```
 
 ## message
@@ -77,7 +77,7 @@ message_type 與 LINE 提供的 message.text, postback.data, message.address 相
 你可以使用以下程式碼取得 message:
 
 ```ruby
-params.dig(:message)
+message = params.dig(:message)
 ```
 
 ## profile
