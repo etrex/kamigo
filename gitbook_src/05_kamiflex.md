@@ -325,7 +325,7 @@ puts json
 但也有另外，例如以下範例：
 ```ruby
 json = Kamiflex.json(self) do
-  alt_text: "this is a flex message"
+  alt_text "this is a flex message"
   bubble do
     body do
       text "Hello, World!"
