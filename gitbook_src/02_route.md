@@ -64,18 +64,12 @@ get "目錄", to: 'home#menu'
 #### 可以使用變數
 
 ```
-get "學 *keyword *message", to: 'keywords#learn'
+get "學 (*keyword) (*message)", to: 'keywords#learn'
 ```
 
 如此即可接受用戶輸入「學 A B」時，將 Request 轉給 keywords_controller 的 learn 方法來處理，你可以在 controller 當中寫 `params[:keyword]` 取得用戶輸入的 A，寫 `params[:message]` 取得用戶輸入的 B。
 
-#### 變數可加括號，變數可省略
-
-```
-get '(*location)天氣', to: 'weathers#show'
-```
-
-如此即可接受用戶輸入「台北天氣」時，將 Request 轉給 weathers_controller 的 show 方法來處理，你可以在 controller 當中寫 `params[:location]` 取得用戶輸入的「台北」。
+#### 最後一個有括號的變數可省略輸入
 
 ```
 get '(*location)天氣', to: 'weathers#show'
@@ -87,4 +81,4 @@ get '(*location)天氣', to: 'weathers#show'
 get '(*location)天氣(*other)', to: 'weathers#show'
 ```
 
-如此即可接受用戶輸入「台北天氣如何」。
+如此即可同時接受用戶輸入「台北天氣」以及「台北天氣如何」。
