@@ -12,3 +12,5 @@ test/dummy/tmp/
 /gitbook_src/_book
 _book
 /gitbook_src/node_modules
+
+.byebug_history
