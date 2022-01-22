@@ -98,6 +98,9 @@ https://你的網域/line
 請在專案根目錄下新增一個 `.env` 檔並且填入以下內容：
 
 ```
+LINE_LOGIN_CHANNEL_ID=這裡填入你的 LINE_LOGIN_CHANNEL_ID
+LINE_LOGIN_CHANNEL_SECRET=這裡填入你的 LINE_LOGIN_CHANNEL_SECRET
+
 LINE_CHANNEL_SECRET=這裡填入你的 LINE_CHANNEL_SECRET
 LINE_CHANNEL_TOKEN=這裡填入你的 LINE_CHANNEL_ACCESS_TOKEN
 LIFF_COMPACT=這裡填入你的 COMPACT_LIFF_URL
@@ -105,6 +108,8 @@ LIFF_TALL=這裡填入你的 TALL_LIFF_URL
 LIFF_FULL=這裡填入你的 FULL_LIFF_URL
 ```
 
+- `LINE_LOGIN_CHANNEL_ID` 可以在 LINE LOGIN 後台的 Basic settings 分頁中找到。
+- `LINE_LOGIN_CHANNEL_SECRET` 可以在 LINE LOGIN 後台的 Basic settings 分頁中找到。
 - `LINE_CHANNEL_SECRET` 可以在 Messaging API 後台的 Basic settings 分頁中找到。
 - `LINE_CHANNEL_ACCESS_TOKEN` 可以在 Messaging API 後台的 Messaging API 分頁中找到。
 - `COMPACT_LIFF_URL`、`TALL_LIFF_URL` 和 `FULL_LIFF_URL` 需要到 LINE 後台的 LIFF 分頁新增後，即可獲得一組 LIFF URL。
