@@ -10,13 +10,13 @@ module Kamigo
       def process(event)
         http_method, path, request_params = kamiform_context(event)
         http_method, path, request_params = language_understanding(event.message) if http_method.nil?
-        encoded_path = URI.encode(path)
+        encoded_path = URI::Parser.new.escape(path)
         request_params = event.platform_params.merge(request_params)
         output = reserve_route(encoded_path, http_method: http_method, request_params: request_params, format: :line)
         return output if output.present?
 
         return nil if Kamigo.default_path.nil?
-        reserve_route(URI.encode(Kamigo.default_path), http_method: Kamigo.default_http_method, request_params: request_params, format: :line)
+        reserve_route(URI::Parser.new.escape(Kamigo.default_path), http_method: Kamigo.default_http_method, request_params: request_params, format: :line)
       end
 
       private

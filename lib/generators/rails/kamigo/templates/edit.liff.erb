@@ -1,2 +1,2 @@
 <%% content_for :title, "Edit <%= singular_table_name.titleize %>" %>
-<%%= render "<%= route_url %>/form.html", <%= singular_table_name %>: @<%= singular_table_name %> %>
+<%%= render partial: "<%= route_url %>/form", formats: [:html], locals: {<%= singular_table_name %>: @<%= singular_table_name %>} %>

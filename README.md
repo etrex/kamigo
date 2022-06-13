@@ -83,6 +83,25 @@ window.addEventListener("liff_submit", function(event){
 });
 ```
 
+若使用 Importmap（Rails 7），請使用 kamigo 0.27.0 以上的版本，並且在 `app/javascript/application.js` 當中
+
+加入以下程式碼：
+
+```
+/* kamiliff default behavior */
+window.addEventListener("liff_ready", function(event){
+  register_kamiliff_submit();
+});
+
+window.addEventListener("liff_submit", function(event){
+  var json = JSON.stringify(event.detail.data);
+  var url = event.detail.url;
+  var method = event.detail.method;
+  var request_text = method + " " + url + "\n" + json;
+  liff_send_text_message(request_text);
+});
+```
+
 這會影響 LINE Bot 在 LIFF 送出表單時的行為。
 
 # 設定聊天機器人 Webhook URL
