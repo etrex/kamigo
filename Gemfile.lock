@@ -3,7 +3,7 @@ PATH
   specs:
     kamigo (0.25.0)
       kamiflex (~> 0.17, >= 0.17.0)
-      kamiliff (~> 0.33, >= 0.33.0)
+      kamiliff (~> 0.36, >= 0.36.0)
       line-bot-api (~> 1.5)
       rails (>= 5.0.0)
 
@@ -80,14 +80,14 @@ GEM
     crass (1.0.6)
     digest (3.1.0)
     erubi (1.10.0)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
-    i18n (1.10.0)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     json (2.6.1)
     kamiflex (0.17.0)
       json
-    kamiliff (0.35.0)
+    kamiliff (0.36.0)
       line_login (>= 0.1.0)
       rails (>= 5.0.0)
     line-bot-api (1.22.0)
@@ -102,7 +102,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.15.0)
+    minitest (5.17.0)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -156,7 +156,7 @@ GEM
     strscan (3.0.3)
     thor (1.2.1)
     timeout (0.2.0)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
