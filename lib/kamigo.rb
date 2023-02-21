@@ -24,7 +24,11 @@ module Kamigo
   @@default_http_method = "GET"
 
   mattr_accessor :line_event_processors
-  @@line_event_processors = [EventProcessors::RailsRouterProcessor.new]
+  @@line_event_processors = [
+    EventProcessors::RailsRouterProcessor.new,
+    EventProcessors::DefaultPathProcessor.new,
+    EventProcessors::DefaultMessageProcessor.new
+  ]
 
   # env
   mattr_writer :line_messaging_api_channel_id

@@ -10,7 +10,7 @@ module Kamigo
         parser = EventParsers::LineEventParser.new
         events = parser.parse_events(@request)
         events.each do |event|
-          output = process_event(event) || Kamigo.line_default_message
+          output = process_event(event)
           responser = EventResponsers::LineEventResponser.new
           response = responser.response_event(event, output)
         end

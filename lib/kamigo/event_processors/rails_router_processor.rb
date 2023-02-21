@@ -10,13 +10,12 @@ module Kamigo
       def process(event)
         http_method, path, request_params = kamiform_context(event)
         http_method, path, request_params = language_understanding(event.message) if http_method.nil?
+        return nil if http_method.nil? || path.nil?
+
         encoded_path = URI::Parser.new.escape(path)
         request_params = event.platform_params.merge(request_params)
         output = reserve_route(encoded_path, http_method: http_method, request_params: request_params, format: :line)
         return output if output.present?
-
-        return nil if Kamigo.default_path.nil?
-        reserve_route(URI::Parser.new.escape(Kamigo.default_path), http_method: Kamigo.default_http_method, request_params: request_params, format: :line)
       end
 
       private
@@ -61,6 +60,8 @@ module Kamigo
         request_params[:authenticity_token] = @form_authenticity_token
         http_method = request_params["_method"]&.upcase || http_method || "GET"
         [http_method, path, request_params]
+      rescue
+        [nil, nil, nil]
       end
 
       def parse_json(string)
