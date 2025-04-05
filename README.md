@@ -133,6 +133,91 @@ LIFF_FULL=這裡填入你的 FULL_LIFF_URL
 - `LINE_CHANNEL_ACCESS_TOKEN` 可以在 Messaging API 後台的 Messaging API 分頁中找到。
 - `COMPACT_LIFF_URL`、`TALL_LIFF_URL` 和 `FULL_LIFF_URL` 需要到 LINE 後台的 LIFF 分頁新增後，即可獲得一組 LIFF URL。
 
+# 進階設定
+
+在 `config/initializers/kamigo.rb` 中，你可以自訂各種設定：
+
+```ruby
+Kamigo.setup do |config|
+  # LINE Messaging API 設定
+  # 預設會從環境變數讀取，但你也可以直接在這裡設定
+  # config.line_messaging_api_channel_id = "your_channel_id"
+  # config.line_messaging_api_channel_secret = "your_channel_secret"
+  # config.line_messaging_api_channel_token = "your_channel_token"
+
+  # 當使用者輸入不符合路由時的預設路徑和 HTTP 方法
+  # config.default_path = "/"
+  # config.default_http_method = "GET"
+
+  # 當 Kamigo 不知道如何回應時，會回覆這個訊息
+  # config.line_default_message = {
+  #   type: "text",
+  #   text: "Sorry, I don't understand your message."
+  # }
+  # 設為 nil 則不回覆訊息
+
+  # 設定訊息處理器，可以自訂處理邏輯
+  # config.line_event_processors = [
+  #   EventProcessors::RailsRouterProcessor.new,
+  #   EventProcessors::DefaultPathProcessor.new,
+  #   EventProcessors::DefaultMessageProcessor.new
+  # ]
+end
+```
+
+# 自定義訊息處理器（Event Processor）
+
+Kamigo 允許你自定義訊息處理器來處理 LINE 的訊息。每個處理器都需要實作 `process` 方法，該方法接收一個 `event` 參數並回傳處理結果。
+
+以下是一個簡單的處理器範例：
+
+```ruby
+module Kamigo
+  module EventProcessors
+    class MyCustomProcessor
+      # 處理器可以存取 request 物件
+      attr_accessor :request
+      
+      def process(event)
+        # event 物件包含以下資訊：
+        # - event.platform_type    # 平台類型（例如：line）
+        # - event.message         # 使用者發送的訊息
+        # - event.platform_params # 平台相關的參數
+        # - event.source_group_id # 群組 ID（如果是群組訊息）
+        
+        # 在這裡實作你的處理邏輯
+        return nil if event.message != "hello"  # 返回 nil 表示不處理此訊息
+        
+        # 返回要回覆給使用者的訊息（支援 LINE Messaging API 的所有訊息格式）
+        {
+          type: "text",
+          text: "Hello! 你好！"
+        }
+      end
+    end
+  end
+end
+
+# 在 config/initializers/kamigo.rb 中註冊你的處理器
+Kamigo.setup do |config|
+  config.line_event_processors = [
+    # 你可以完全自定義處理器順序
+    EventProcessors::MyCustomProcessor.new,
+    EventProcessors::RailsRouterProcessor.new,
+    EventProcessors::DefaultPathProcessor.new,
+    EventProcessors::DefaultMessageProcessor.new
+  ]
+end
+```
+
+處理器會按照註冊順序依次處理訊息，直到某個處理器返回非 nil 的結果。這讓你可以：
+
+1. 建立特定關鍵字的回應
+2. 實作自定義的語意理解
+3. 整合第三方 NLP 服務
+4. 處理特殊類型的訊息（圖片、音訊等）
+5. 實作多輪對話
+
 Kamigo 預設的 LIFF Size 為 Compact，你也可以只新增 Compact LIFF URL。
 詳細的 LIFF 設定說明可以服用此帖 [LIFF 設定 QA](/doc/07_setting.md#LIFF-設定-QA)。
 

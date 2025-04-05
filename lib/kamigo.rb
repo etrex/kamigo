@@ -32,22 +32,15 @@ module Kamigo
     EventProcessors::DefaultMessageProcessor.new
   ]
 
-  # env
-  mattr_writer :line_messaging_api_channel_id
-  mattr_writer :line_messaging_api_channel_secret
-  mattr_writer :line_messaging_api_channel_token
+  # LINE Messaging API configuration
+  mattr_accessor :line_messaging_api_channel_id
+  @@line_messaging_api_channel_id = ENV["LINE_CHANNEL_ID"]
 
-  def self.line_messaging_api_channel_id
-    @@line_message_api_channel_id = ENV["LINE_CHANNEL_ID"]
-  end
+  mattr_accessor :line_messaging_api_channel_secret
+  @@line_messaging_api_channel_secret = ENV["LINE_CHANNEL_SECRET"]
 
-  def self.line_messaging_api_channel_secret
-    @@line_message_api_channel_secret = ENV["LINE_CHANNEL_SECRET"]
-  end
-
-  def self.line_messaging_api_channel_token
-    @@line_message_api_channel_token = ENV["LINE_CHANNEL_TOKEN"]
-  end
+  mattr_accessor :line_messaging_api_channel_token
+  @@line_messaging_api_channel_token = ENV["LINE_CHANNEL_TOKEN"]
 
   class << self
     delegate :line_login_channel_id, :line_login_channel_id=, to: :Kamiliff

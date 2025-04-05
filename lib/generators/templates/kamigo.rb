@@ -13,5 +13,18 @@ Kamigo.setup do |config|
   # config.line_default_message = nil
 
   # When Kamigo receive a request, then Kamigo will process the request with the following processors.
-  # config.line_event_processors = [Kamigo::EventProcessors::RailsRouterProcessor.new]
+  # config.line_event_processors = [
+  #   EventProcessors::RailsRouterProcessor.new,
+  #   EventProcessors::DefaultPathProcessor.new,
+  #   EventProcessors::DefaultMessageProcessor.new
+  # ]
+
+  # LINE Messaging API configuration
+  # By default, these values are read from environment variables:
+  # LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, and LINE_CHANNEL_TOKEN
+  # You can override them here if needed:
+  #
+  # config.line_messaging_api_channel_id = "your_channel_id"
+  # config.line_messaging_api_channel_secret = "your_channel_secret"
+  # config.line_messaging_api_channel_token = "your_channel_token"
 end
