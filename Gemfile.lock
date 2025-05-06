@@ -3,7 +3,7 @@ PATH
   specs:
     kamigo (0.25.0)
       kamiflex (~> 0.17, >= 0.17.0)
-      kamiliff (~> 0.33, >= 0.33.0)
+      kamiliff (~> 0.36, >= 0.36.0)
       line-bot-api (~> 1.5)
       rails (>= 5.0.0)
 
@@ -87,13 +87,13 @@ GEM
     json (2.6.1)
     kamiflex (0.17.0)
       json
-    kamiliff (0.35.0)
+    kamiliff (0.36.0)
       line_login (>= 0.1.0)
       rails (>= 5.0.0)
     line-bot-api (1.22.0)
     line_login (0.1.0)
       json
-    loofah (2.18.0)
+    loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -118,10 +118,10 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.6)
+    nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    racc (1.6.0)
+    racc (1.6.1)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
