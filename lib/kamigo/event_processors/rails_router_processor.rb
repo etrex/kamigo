@@ -3,6 +3,7 @@ module Kamigo
     class RailsRouterProcessor
       attr_accessor :request
       attr_accessor :form_authenticity_token
+      attr_accessor :account
 
       def initialize
       end

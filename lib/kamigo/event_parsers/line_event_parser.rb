@@ -3,6 +3,10 @@ module Kamigo
     class LineEventParser
       include Kamigo::Clients::LineClient
 
+      def initialize(account: nil)
+        @client = account&.client
+      end
+
       def parse_events(request)
         body = request.body.read
         events = client.parse_events_from(body)

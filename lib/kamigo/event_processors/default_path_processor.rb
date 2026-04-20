@@ -3,10 +3,13 @@ module Kamigo
     class DefaultPathProcessor
       attr_accessor :request
       attr_accessor :form_authenticity_token
+      attr_accessor :account
 
       def process(event)
-        return nil if Kamigo.default_path.nil?
-        reserve_route(URI::Parser.new.escape(Kamigo.default_path), http_method: Kamigo.default_http_method, request_params: event.platform_params, format: :line)
+        path = @account&.default_path || Kamigo.default_path
+        return nil if path.nil?
+        http_method = @account&.default_http_method || Kamigo.default_http_method
+        reserve_route(URI::Parser.new.escape(path), http_method: http_method, request_params: event.platform_params, format: :line)
       end
 
       private

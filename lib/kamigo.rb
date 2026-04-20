@@ -3,6 +3,7 @@ require "line-bot-api"
 require "kamiflex"
 require "kamiliff"
 require "kamigo/clients/line_client"
+require "kamigo/line_account"
 require "kamigo/events/basic_event"
 require "kamigo/events/line_event"
 require "kamigo/event_parsers/line_event_parser"
@@ -32,7 +33,7 @@ module Kamigo
     EventProcessors::DefaultMessageProcessor.new
   ]
 
-  # LINE Messaging API configuration
+  # LINE Messaging API configuration (single account, backward compatible)
   mattr_accessor :line_messaging_api_channel_id
   @@line_messaging_api_channel_id = ENV["LINE_CHANNEL_ID"]
 
@@ -41,6 +42,10 @@ module Kamigo
 
   mattr_accessor :line_messaging_api_channel_token
   @@line_messaging_api_channel_token = ENV["LINE_CHANNEL_TOKEN"]
+
+  # Multi-account registry
+  mattr_accessor :line_accounts
+  @@line_accounts = {}
 
   class << self
     delegate :line_login_channel_id, :line_login_channel_id=, to: :Kamiliff
@@ -53,5 +58,28 @@ module Kamigo
 
   def self.setup
     yield self
+  end
+
+  def self.line_account(name)
+    account = LineAccount.new(name)
+    yield account
+    @@line_accounts[name.to_s] = account
+  end
+
+  def self.find_account(name)
+    return default_account if name.blank?
+    @@line_accounts[name.to_s] || default_account
+  end
+
+  def self.default_account
+    return @@line_accounts.values.first if @@line_accounts.any?
+
+    account = LineAccount.new("default")
+    account.channel_id = line_messaging_api_channel_id
+    account.channel_secret = line_messaging_api_channel_secret
+    account.channel_token = line_messaging_api_channel_token
+    account.default_path = default_path
+    account.default_http_method = default_http_method
+    account
   end
 end

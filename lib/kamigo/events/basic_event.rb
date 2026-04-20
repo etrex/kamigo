@@ -9,6 +9,7 @@ module Kamigo
       attr_accessor :source_user_id
       attr_accessor :profile
       attr_accessor :payload
+      attr_accessor :account_name
 
       def platform_params
         {
@@ -19,7 +20,8 @@ module Kamigo
           source_group_id: source_group_id,
           source_user_id: source_user_id,
           profile: profile,
-          payload: payload
+          payload: payload,
+          account_name: account_name
         }
       end
     end

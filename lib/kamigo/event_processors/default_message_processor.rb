@@ -3,6 +3,7 @@ module Kamigo
     class DefaultMessageProcessor
       attr_accessor :request
       attr_accessor :form_authenticity_token
+      attr_accessor :account
 
       def process(event)
         if event.platform_type == "line"
