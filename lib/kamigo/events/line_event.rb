@@ -6,6 +6,10 @@ module Kamigo
       def initialize
         self.platform_type = 'line'
       end
+
+      def platform_params
+        super.merge(replyToken: reply_token)
+      end
     end
   end
 end
