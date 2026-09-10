@@ -7,6 +7,22 @@ module Kamigo
     end
     class Outbox < ActiveRecord::Base
       self.table_name = "kamigo_outbox"
+
+      def self.enqueue!(platform:, connection:, conversation_id:, messages:, delivery_options: {}, state: "pending")
+        transaction do
+          serialize_stream!(platform, connection, conversation_id)
+          create!(platform: platform, connection: connection, conversation_id: conversation_id,
+            messages: messages, delivery_options: delivery_options, state: state)
+        end
+      end
+
+      def self.serialize_stream!(platform, connection_name, conversation_id)
+        return unless connection.adapter_name == "PostgreSQL"
+        stream = [platform, connection_name, conversation_id].map(&:to_s).join("\u001F")
+        quoted = connection.quote(stream)
+        connection.execute("SELECT pg_advisory_xact_lock(hashtextextended(#{quoted}, 0))")
+      end
+      private_class_method :serialize_stream!
     end
 
     class Receiver
@@ -34,7 +50,7 @@ module Kamigo
             raise TypeError, "resolver must return Kamigo::Context" unless context.is_a?(Context)
             messages = @dispatcher.call(event, context: context)
             if messages && !messages.empty?
-              Outbox.create!(platform: event.platform, connection: event.connection,
+              Outbox.enqueue!(platform: event.platform, connection: event.connection,
                 conversation_id: event.conversation_id, messages: messages,
                 delivery_options: (event.platform == "line" && event.payload["replyToken"] ? {reply_token: event.payload["replyToken"]} : {}), state: "pending")
             end

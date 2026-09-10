@@ -5,6 +5,7 @@ require 'etc'
 require 'socket'
 require 'json'
 require 'active_record'
+require 'thread'
 require_relative '../../lib/kamigo/event'
 require_relative '../../lib/kamigo/reliability'
 require_relative '../../db/migrate/20260909000002_create_kamigo_delivery'
@@ -105,6 +106,53 @@ begin
   ordered_results=[earlier_result,later_while_first_sends,later_retry]
   abort({results:ordered_results,messages:ordered_messages}.inspect) unless ordered_results==[:sent,:blocked,:sent] && ordered_messages==%w[first second]
 
+  race_created=Queue.new
+  release_race=Queue.new
+  race_first_id=Queue.new
+  race_second_id=Queue.new
+  race_errors=Queue.new
+  race_first_thread=Thread.new do
+    ActiveRecord::Base.connection_pool.with_connection do
+      Kamigo::Reliability::Outbox.transaction do
+        row=Kamigo::Reliability::Outbox.enqueue!(platform:'telegram',connection:'main',conversation_id:'commit-race',messages:[{text:'race first'}])
+        race_first_id << row.id
+        race_created << true
+        release_race.pop
+      end
+    end
+  rescue StandardError => error
+    race_errors << error
+  end
+  race_created.pop
+  race_second_thread=Thread.new do
+    ActiveRecord::Base.connection_pool.with_connection do
+      row=Kamigo::Reliability::Outbox.enqueue!(platform:'telegram',connection:'main',conversation_id:'commit-race',messages:[{text:'race second'}])
+      race_second_id << row.id
+    end
+  rescue StandardError => error
+    race_errors << error
+  end
+  sleep 0.2
+  second_committed_early=begin race_second_id.pop(true); rescue ThreadError; nil end
+  ready_during_uncommitted=Kamigo::Reliability::Delivery.ready_ids(limit:10)
+  abort({second_committed_early:second_committed_early,ready:ready_during_uncommitted}.inspect) if second_committed_early || ready_during_uncommitted.any?
+  release_race << true
+  race_first_thread.join
+  race_second_thread.join
+  raise race_errors.pop unless race_errors.empty?
+  committed_first_id=race_first_id.pop
+  committed_second_id=race_second_id.pop
+  race_ready_first=Kamigo::Reliability::Delivery.ready_ids(limit:10)
+  abort race_ready_first.inspect unless race_ready_first==[committed_first_id] && committed_first_id < committed_second_id
+  race_messages=[]
+  race_adapter=Object.new
+  race_adapter.define_singleton_method(:deliver){|messages:,**|race_messages << messages.fetch(0).fetch(:text);{status:200}}
+  race_delivery=Kamigo::Reliability::Delivery.new(adapter_resolver:->(*){race_adapter})
+  race_delivery.call(committed_first_id)
+  abort Kamigo::Reliability::Delivery.ready_ids(limit:10).inspect unless Kamigo::Reliability::Delivery.ready_ids(limit:10)==[committed_second_id]
+  race_delivery.call(committed_second_id)
+  abort race_messages.inspect unless race_messages==['race first','race second']
+
   Kamigo::Reliability::Outbox.create!(platform:'telegram',connection:'main',conversation_id:'blocked-chat',messages:[{text:'in flight'}],delivery_options:{},state:'sending')
   100.times do |number|
     Kamigo::Reliability::Outbox.create!(platform:'telegram',connection:'main',conversation_id:'blocked-chat',messages:[{text:"blocked #{number}"}],delivery_options:{},state:'pending')
@@ -116,7 +164,8 @@ begin
 
   puts JSON.generate(receipts:Kamigo::Reliability::Receipt.count,business_effects:business_record.count,
     outboxes:Kamigo::Reliability::Outbox.count,delivery_attempts:attempts,state:outbox.state,
-    ordered_results:ordered_results,ordered_messages:ordered_messages,fair_ready:fair_ready)
+    ordered_results:ordered_results,ordered_messages:ordered_messages,
+    uncommitted_blocked:second_committed_early.nil? && ready_during_uncommitted.empty?,race_messages:race_messages,fair_ready:fair_ready)
 ensure
   ActiveRecord::Base.connection_pool.disconnect! if ActiveRecord::Base.connected?
   run_pg.call('pg_ctl','-D',File.join(directory,'data'),'-m','fast','-w','stop') if started
