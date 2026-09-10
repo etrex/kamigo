@@ -48,20 +48,48 @@ module Kamigo
     # An interrupted/failed send is uncertain, never automatically replayed.
     # A delivery worker can reconcile using provider idempotency/status capabilities.
     class Delivery
+      def self.ready_ids(limit:)
+        limit = Integer(limit)
+        raise ArgumentError, "limit must be positive" unless limit.positive?
+        table = Outbox.connection.quote_table_name(Outbox.table_name)
+        # Return only the oldest pending row in each unblocked conversation.
+        # This prevents a busy or stalled conversation from consuming a global
+        # worker batch while preserving creation order inside that conversation.
+        unblocked = <<~SQL.squish
+          NOT EXISTS (
+            SELECT 1 FROM #{table} AS kamigo_earlier_outbox
+            WHERE kamigo_earlier_outbox.platform = #{table}.platform
+              AND kamigo_earlier_outbox.connection = #{table}.connection
+              AND kamigo_earlier_outbox.conversation_id = #{table}.conversation_id
+              AND kamigo_earlier_outbox.id < #{table}.id
+              AND kamigo_earlier_outbox.state IN ('pending', 'sending')
+          )
+        SQL
+        Outbox.where(state: "pending").where(unblocked).order(:id).limit(limit).pluck(:id)
+      rescue ArgumentError, TypeError
+        raise ArgumentError, "limit must be positive"
+      end
+
       def initialize(adapter_resolver:)
         @adapter_resolver = adapter_resolver
       end
       def call(id)
         row = Outbox.find(id)
-        claimed = row.with_lock do
-          if row.state == "pending"
-            row.update!(state: "sending")
-            true
+        claim = row.with_lock do
+          if row.state != "pending"
+            :not_pending
+          elsif Outbox.where(platform: row.platform, connection: row.connection, conversation_id: row.conversation_id)
+              .where('id < ?', row.id).where(state: %w[pending sending]).exists?
+            # Keep replies for one conversation in creation order even when
+            # several deployment workers selected adjacent rows together.
+            # The caller can retry this still-pending row on its next drain.
+            :blocked
           else
-            false
+            row.update!(state: "sending")
+            :claimed
           end
         end
-        return :not_pending unless claimed
+        return claim unless claim == :claimed
         begin
           adapter = @adapter_resolver.call(row.platform, row.connection)
           adapter.deliver(conversation_id: row.conversation_id, messages: row.messages.map { |message| message.deep_symbolize_keys }, **row.delivery_options.deep_symbolize_keys)

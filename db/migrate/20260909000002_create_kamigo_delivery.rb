@@ -19,5 +19,6 @@ class CreateKamigoDelivery < ActiveRecord::Migration[8.1]
     end
     add_check_constraint :kamigo_outbox, "state IN ('pending','sending','sent','uncertain')", name: "kamigo_outbox_state"
     add_index :kamigo_outbox, [:state, :id]
+    add_index :kamigo_outbox, [:platform, :connection, :conversation_id, :state, :id], name: "kamigo_outbox_stream_state_order"
   end
 end
