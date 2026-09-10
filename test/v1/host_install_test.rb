@@ -15,6 +15,6 @@ class HostInstallTest < Minitest::Test
     assert_equal true, result['conversations']
     assert_equal true, result['receipts']
     assert_equal true, result['initializer']
-    assert_equal 5, result['migrations']
+    assert_equal 6, result['migrations']
   end
 end

@@ -4,6 +4,7 @@ require 'active_support/core_ext/hash/keys'
 require_relative '../../lib/kamigo/event'
 require_relative '../../lib/kamigo/reliability'
 require_relative '../../db/migrate/20260909000002_create_kamigo_delivery'
+require_relative '../../db/migrate/20260910000001_add_kamigo_outbox_stream_heads'
 
 class ReliabilityTest < Minitest::Test
   class BusinessRecord < ActiveRecord::Base
@@ -14,6 +15,7 @@ class ReliabilityTest < Minitest::Test
     ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
     ActiveRecord::Migration.verbose = false
     CreateKamigoDelivery.new.change
+    AddKamigoOutboxStreamHeads.new.up
     ActiveRecord::Base.connection.create_table(:test_business_records) { |t| t.string :value }
     BusinessRecord.reset_column_information
     @event = Kamigo::Event.new(platform: 'line', connection: 'main', id: 'event-1', actor_id: 'user', conversation_id: 'group', type: :message)
@@ -40,7 +42,7 @@ class ReliabilityTest < Minitest::Test
   def test_failure_rolls_back_receipt_business_and_outbox_then_retry_succeeds
     target = receiver do |_event, context:|
       BusinessRecord.create!(value: 'tentative')
-      Kamigo::Reliability::Outbox.create!(platform: 'line', connection: 'main', conversation_id: 'group', messages: [], state: 'pending')
+      Kamigo::Reliability::Outbox.enqueue!(platform: 'line', connection: 'main', conversation_id: 'group', messages: [])
       raise 'business failed'
     end
     assert_raises(RuntimeError) { target.process(@event) }
@@ -104,10 +106,24 @@ class ReliabilityTest < Minitest::Test
     assert_equal :not_pending, delivery.call(row.id)
   end
 
+  def test_delivery_promotes_the_next_materialized_stream_head
+    first = new_outbox
+    second = new_outbox
+    assert first.stream_head?
+    refute second.stream_head?
+    assert_equal [first.id], Kamigo::Reliability::Delivery.ready_ids(limit: 10)
+    adapter = Object.new
+    adapter.define_singleton_method(:deliver) { |**| { status: 200 } }
+    delivery = Kamigo::Reliability::Delivery.new(adapter_resolver: ->(*) { adapter })
+    assert_equal :sent, delivery.call(first.id)
+    assert second.reload.stream_head?
+    assert_equal [second.id], Kamigo::Reliability::Delivery.ready_ids(limit: 10)
+  end
+
   private
 
   def new_outbox
-    Kamigo::Reliability::Outbox.create!(platform: 'line', connection: 'main', conversation_id: 'group',
-      messages: [{ type: 'text', text: 'hello' }], state: 'pending')
+    Kamigo::Reliability::Outbox.enqueue!(platform: 'line', connection: 'main', conversation_id: 'group',
+      messages: [{ type: 'text', text: 'hello' }])
   end
 end

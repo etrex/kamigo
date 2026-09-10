@@ -11,14 +11,15 @@ class PostgresHostInstallTest < Minitest::Test
     assert status.success?, output
     result = JSON.parse(output.lines.last)
     assert_equal 'PostgreSQL', result.fetch('adapter')
-    assert_equal 5, result.fetch('migrations')
+    assert_equal 6, result.fetch('migrations')
     assert result.fetch('tables').values.all?, result.fetch('tables').inspect
     %w[principal identity conversation membership receipt outbox].each do |record|
       assert_equal true, result.fetch(record), record
     end
     assert_equal true, result.fetch('invalid_role_rejected')
     assert_equal true, result.fetch('invalid_identity_rejected')
-    assert_equal true, result.fetch('stream_order_index')
+    assert_equal true, result.fetch('invalid_head_rejected')
+    assert result.fetch('stream_indexes').values.all?, result.fetch('stream_indexes').inspect
     assert_equal true, result.fetch('initializer')
   end
 end

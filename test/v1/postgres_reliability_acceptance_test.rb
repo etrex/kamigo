@@ -12,13 +12,20 @@ class PostgresReliabilityAcceptanceTest < Minitest::Test
     result=JSON.parse(output.lines.last)
     assert_equal 1,result['receipts']
     assert_equal 1,result['business_effects']
-    assert_equal 107,result['outboxes']
+    assert_equal 1_000_009,result['outboxes']
     assert_equal 1,result['delivery_attempts']
     assert_equal 'sent',result['state']
     assert_equal %w[sent blocked sent],result['ordered_results']
     assert_equal %w[first second],result['ordered_messages']
+    assert_equal true,result['advisory_wait_observed']
     assert_equal true,result['uncommitted_blocked']
     assert_equal ['race first','race second'],result['race_messages']
+    assert_equal true,result['upgrade_quarantine']
+    assert_equal true,result['maintenance']
+    assert_equal [1000,1000,501],result['expiry_batches']
     assert_equal true,result['fair_ready']
+    assert_equal 1_000_000,result['fair_backlog']
+    assert_equal true,result['ready_index_used']
+    assert_operator result['ready_execution_ms'],:<,250
   end
 end

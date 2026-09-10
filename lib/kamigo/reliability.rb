@@ -7,12 +7,64 @@ module Kamigo
     end
     class Outbox < ActiveRecord::Base
       self.table_name = "kamigo_outbox"
+      ACTIVE_STATES = %w[pending sending].freeze
+      TERMINAL_STATES = %w[sent uncertain].freeze
 
-      def self.enqueue!(platform:, connection:, conversation_id:, messages:, delivery_options: {}, state: "pending")
+      def self.enqueue!(platform:, connection:, conversation_id:, messages:, delivery_options: {})
         transaction do
           serialize_stream!(platform, connection, conversation_id)
+          has_head = where(platform: platform, connection: connection, conversation_id: conversation_id, stream_head: true).exists?
           create!(platform: platform, connection: connection, conversation_id: conversation_id,
-            messages: messages, delivery_options: delivery_options, state: state)
+            messages: messages, delivery_options: delivery_options, state: "pending", stream_head: !has_head)
+        end
+      end
+
+      def self.finalize_delivery!(id, state:)
+        raise ArgumentError, "invalid terminal state" unless TERMINAL_STATES.include?(state)
+        snapshot = find_by(id: id)
+        return false unless snapshot
+        transaction do
+          serialize_stream!(snapshot.platform, snapshot.connection, snapshot.conversation_id)
+          row = lock.find_by(id: id, platform: snapshot.platform, connection: snapshot.connection, conversation_id: snapshot.conversation_id)
+          next false unless row&.state == "sending"
+          was_head = row.stream_head?
+          row.update!(state: state, stream_head: false)
+          promote_stream!(row.platform, row.connection, row.conversation_id) if was_head
+          true
+        end
+      end
+
+      def self.recover_stale_sending!(before:, limit:)
+        relation = where(state: "sending").where("updated_at < ?", before).order(:updated_at, :id)
+        maintain_by_stream(relation, limit) do |rows, _stream|
+          rows.each do |row|
+            was_head = row.stream_head?
+            row.update!(state: "uncertain", stream_head: false)
+            promote_stream!(row.platform, row.connection, row.conversation_id) if was_head
+          end
+          rows.length
+        end
+      end
+
+      def self.expire_stale_pending!(before:, limit:)
+        relation = where(state: "pending").where("created_at < ?", before).order(:created_at, :id)
+        maintain_by_stream(relation, limit) do |rows, _stream|
+          removed_heads = rows.select(&:stream_head?).map { |row| [row.platform, row.connection, row.conversation_id] }.uniq
+          where(id: rows.map(&:id)).delete_all
+          removed_heads.each { |platform, connection_name, conversation_id| promote_stream!(platform, connection_name, conversation_id) }
+          rows.length
+        end
+      end
+
+      def self.delete_stale_terminal!(before:, limit:)
+        limit = normalize_limit(limit)
+        transaction do
+          relation = where(state: TERMINAL_STATES).where("created_at < ?", before).order(:created_at, :id)
+          relation = relation.lock("FOR UPDATE SKIP LOCKED") if connection.adapter_name == "PostgreSQL"
+          relation = relation.lock unless connection.adapter_name == "PostgreSQL"
+          rows = relation.limit(limit).to_a
+          next 0 if rows.empty?
+          where(id: rows.map(&:id)).delete_all
         end
       end
 
@@ -22,7 +74,45 @@ module Kamigo
         quoted = connection.quote(stream)
         connection.execute("SELECT pg_advisory_xact_lock(hashtextextended(#{quoted}, 0))")
       end
-      private_class_method :serialize_stream!
+
+      def self.try_serialize_stream!(platform, connection_name, conversation_id)
+        return true unless connection.adapter_name == "PostgreSQL"
+        stream = [platform, connection_name, conversation_id].map(&:to_s).join("\u001F")
+        quoted = connection.quote(stream)
+        connection.select_value("SELECT pg_try_advisory_xact_lock(hashtextextended(#{quoted}, 0))")
+      end
+
+      def self.maintain_by_stream(relation, limit)
+        limit = normalize_limit(limit)
+        streams = relation.limit(limit).pluck(:platform, :connection, :conversation_id).uniq
+        affected = 0
+        streams.each do |platform, connection_name, conversation_id|
+          break if affected >= limit
+          affected += transaction do
+            next 0 unless try_serialize_stream!(platform, connection_name, conversation_id)
+            rows = relation.where(platform: platform, connection: connection_name, conversation_id: conversation_id)
+            rows = rows.lock("FOR UPDATE SKIP LOCKED") if connection.adapter_name == "PostgreSQL"
+            rows = rows.lock unless connection.adapter_name == "PostgreSQL"
+            rows = rows.limit(limit - affected).to_a
+            next 0 if rows.empty?
+            yield rows, [platform, connection_name, conversation_id]
+          end
+        end
+        affected
+      end
+
+      def self.normalize_limit(value)
+        limit = Integer(value)
+        raise ArgumentError, "limit must be positive" unless limit.positive?
+        limit
+      end
+
+      def self.promote_stream!(platform, connection_name, conversation_id)
+        next_row = where(platform: platform, connection: connection_name, conversation_id: conversation_id, state: ACTIVE_STATES).order(:id).first
+        next_row&.update_columns(stream_head: true)
+      end
+
+      private_class_method :serialize_stream!, :try_serialize_stream!, :maintain_by_stream, :normalize_limit, :promote_stream!
     end
 
     class Receiver
@@ -52,7 +142,7 @@ module Kamigo
             if messages && !messages.empty?
               Outbox.enqueue!(platform: event.platform, connection: event.connection,
                 conversation_id: event.conversation_id, messages: messages,
-                delivery_options: (event.platform == "line" && event.payload["replyToken"] ? {reply_token: event.payload["replyToken"]} : {}), state: "pending")
+                delivery_options: (event.platform == "line" && event.payload["replyToken"] ? {reply_token: event.payload["replyToken"]} : {}))
             end
             result = :processed
           end
@@ -67,52 +157,36 @@ module Kamigo
       def self.ready_ids(limit:)
         limit = Integer(limit)
         raise ArgumentError, "limit must be positive" unless limit.positive?
-        table = Outbox.connection.quote_table_name(Outbox.table_name)
-        # Return only the oldest pending row in each unblocked conversation.
-        # This prevents a busy or stalled conversation from consuming a global
-        # worker batch while preserving creation order inside that conversation.
-        unblocked = <<~SQL.squish
-          NOT EXISTS (
-            SELECT 1 FROM #{table} AS kamigo_earlier_outbox
-            WHERE kamigo_earlier_outbox.platform = #{table}.platform
-              AND kamigo_earlier_outbox.connection = #{table}.connection
-              AND kamigo_earlier_outbox.conversation_id = #{table}.conversation_id
-              AND kamigo_earlier_outbox.id < #{table}.id
-              AND kamigo_earlier_outbox.state IN ('pending', 'sending')
-          )
-        SQL
-        Outbox.where(state: "pending").where(unblocked).order(:id).limit(limit).pluck(:id)
-      rescue ArgumentError, TypeError
-        raise ArgumentError, "limit must be positive"
+        Outbox.where(state: "pending", stream_head: true).order(:id).limit(limit).pluck(:id)
       end
 
       def initialize(adapter_resolver:)
         @adapter_resolver = adapter_resolver
       end
       def call(id)
-        row = Outbox.find(id)
-        claim = row.with_lock do
-          if row.state != "pending"
-            :not_pending
-          elsif Outbox.where(platform: row.platform, connection: row.connection, conversation_id: row.conversation_id)
-              .where('id < ?', row.id).where(state: %w[pending sending]).exists?
-            # Keep replies for one conversation in creation order even when
-            # several deployment workers selected adjacent rows together.
-            # The caller can retry this still-pending row on its next drain.
-            :blocked
-          else
-            row.update!(state: "sending")
-            :claimed
+        row = Outbox.find_by(id: id)
+        return :not_pending unless row
+        claim = begin
+          row.with_lock do
+            if row.state != "pending"
+              :not_pending
+            elsif !row.stream_head?
+              :blocked
+            else
+              row.update!(state: "sending")
+              :claimed
+            end
           end
+        rescue ActiveRecord::RecordNotFound
+          :not_pending
         end
         return claim unless claim == :claimed
         begin
           adapter = @adapter_resolver.call(row.platform, row.connection)
           adapter.deliver(conversation_id: row.conversation_id, messages: row.messages.map { |message| message.deep_symbolize_keys }, **row.delivery_options.deep_symbolize_keys)
-          row.update!(state: "sent")
-          :sent
+          Outbox.finalize_delivery!(row.id, state: "sent") ? :sent : :uncertain
         rescue StandardError
-          row.update!(state: "uncertain")
+          Outbox.finalize_delivery!(row.id, state: "uncertain")
           raise
         end
       end
