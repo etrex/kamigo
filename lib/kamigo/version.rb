@@ -1,3 +1,3 @@
 module Kamigo
-  VERSION = '0.36.1'.freeze
+  VERSION = "1.0.0"
 end

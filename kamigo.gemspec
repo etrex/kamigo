@@ -14,11 +14,17 @@ Gem::Specification.new do |spec|
   spec.description = "a chatbot framework based on rails"
   spec.license     = "MIT"
 
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,db,lib}/**/*", "docs/1.0.md", "docs/performance-1.0.md", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", ">= 5.0.0"
-  spec.add_dependency "kamiliff", '~> 0.36', ">= 0.36.0"
-  spec.add_dependency "kamiflex", '~> 0.17', ">= 0.17.0"
-  spec.add_dependency "line-bot-api", '~> 1.28'
-  spec.add_development_dependency "sqlite3"
+  # Rails 8.1 JSON decoder passes positional options; json 3 requires keywords.
+  spec.add_dependency "json", ">= 2.0", "< 3"
+  spec.required_ruby_version = ">= 4.0"
+  spec.add_dependency "rails", "~> 8.1", ">= 8.1.3.1"
+  spec.add_dependency "kamiliff", "~> 1.0"
+  spec.add_dependency "kamiflex", "~> 1.0"
+  spec.add_development_dependency "sqlite3", ">= 2.1"
+  spec.add_development_dependency "pg", ">= 1.5"
+  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "benchmark"
 end

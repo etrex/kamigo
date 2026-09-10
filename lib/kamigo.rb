@@ -1,85 +1,17 @@
+# frozen_string_literal: true
+require "rails"
+require "kamigo/version"
+require "kamigo/event"
+require "kamigo/router"
+require "kamigo/dispatcher"
 require "kamigo/engine"
-require "line-bot-api"
 require "kamiflex"
 require "kamiliff"
-require "kamigo/clients/line_client"
-require "kamigo/line_account"
-require "kamigo/events/basic_event"
-require "kamigo/events/line_event"
-require "kamigo/event_parsers/line_event_parser"
-require "kamigo/event_responsers/line_event_responser"
-require "kamigo/event_processors/rails_router_processor"
-require "kamigo/event_processors/default_path_processor"
-require "kamigo/event_processors/default_message_processor"
-require "kamigo/request_handlers/line_request_handler"
-
-module Kamigo
-  mattr_accessor :line_default_message
-  @@line_default_message = {
-    type: "text",
-    text: "Sorry, I don't understand your message."
-  }
-
-  mattr_accessor :default_path
-  @@default_path = nil
-
-  mattr_accessor :default_http_method
-  @@default_http_method = "GET"
-
-  mattr_accessor :line_event_processors
-  @@line_event_processors = [
-    EventProcessors::RailsRouterProcessor.new,
-    EventProcessors::DefaultPathProcessor.new,
-    EventProcessors::DefaultMessageProcessor.new
-  ]
-
-  # LINE Messaging API configuration (single account, backward compatible)
-  mattr_accessor :line_messaging_api_channel_id
-  @@line_messaging_api_channel_id = ENV["LINE_CHANNEL_ID"]
-
-  mattr_accessor :line_messaging_api_channel_secret
-  @@line_messaging_api_channel_secret = ENV["LINE_CHANNEL_SECRET"]
-
-  mattr_accessor :line_messaging_api_channel_token
-  @@line_messaging_api_channel_token = ENV["LINE_CHANNEL_TOKEN"]
-
-  # Multi-account registry
-  mattr_accessor :line_accounts
-  @@line_accounts = {}
-
-  class << self
-    delegate :line_login_channel_id, :line_login_channel_id=, to: :Kamiliff
-    delegate :line_login_channel_secret, :line_login_channel_secret=, to: :Kamiliff
-    delegate :line_login_redirect_uri, :line_login_redirect_uri=, to: :Kamiliff
-    delegate :liff_url_compact, :liff_url_compact=, to: :Kamiliff
-    delegate :liff_url_tall, :liff_url_tall=, to: :Kamiliff
-    delegate :liff_url_full, :liff_url_full=, to: :Kamiliff
-  end
-
-  def self.setup
-    yield self
-  end
-
-  def self.line_account(name)
-    account = LineAccount.new(name)
-    yield account
-    @@line_accounts[name.to_s] = account
-  end
-
-  def self.find_account(name)
-    return default_account if name.blank?
-    @@line_accounts[name.to_s] || default_account
-  end
-
-  def self.default_account
-    return @@line_accounts.values.first if @@line_accounts.any?
-
-    account = LineAccount.new("default")
-    account.channel_id = line_messaging_api_channel_id
-    account.channel_secret = line_messaging_api_channel_secret
-    account.channel_token = line_messaging_api_channel_token
-    account.default_path = default_path
-    account.default_http_method = default_http_method
-    account
-  end
-end
+require "kamigo/controller"
+require "kamigo/agent"
+require "kamigo/identity"
+require "kamigo/platforms/line"
+require "kamigo/platforms/telegram"
+require "kamigo/rendering/renderer"
+require "kamigo/reliability"
+require "kamigo/platforms/http_transport"
