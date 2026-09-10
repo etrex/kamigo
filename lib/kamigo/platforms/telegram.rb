@@ -34,8 +34,10 @@ module Kamigo
           value = message.is_a?(Hash) && (message[:text] || message['text'])
           raise ArgumentError, 'Telegram text must contain 1..4096 characters' unless value.is_a?(String) && (1..4096).cover?(value.length)
         end
-        messages.map do |message|
-          transmit(platform: :telegram, operation: :send_message, payload: message.merge(chat_id: conversation_id))
+        messages.each_with_index.map do |message, index|
+          result = transmit(platform: :telegram, operation: :send_message, payload: message.merge(chat_id: conversation_id))
+          yield(message_indexes: [index], provider_receipt: result) if block_given?
+          result
         end
       end
     end

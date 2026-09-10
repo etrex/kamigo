@@ -34,13 +34,15 @@ module Kamigo
         messages.each do |message|
           raise ArgumentError, 'LINE message must have a type' unless message.is_a?(Hash) && (message[:type] || message['type'])
         end
-        if reply_token
+        result = if reply_token
           raise ArgumentError, 'reply token must not be empty' if reply_token.to_s.empty?
           transmit(platform: :line, operation: :reply, payload: { replyToken: reply_token, messages: messages })
         else
           raise ArgumentError, 'conversation ID is required' if conversation_id.to_s.empty?
           transmit(platform: :line, operation: :push, payload: { to: conversation_id, messages: messages })
         end
+        yield(message_indexes: (0...messages.length).to_a, provider_receipt: result) if block_given?
+        result
       end
     end
   end

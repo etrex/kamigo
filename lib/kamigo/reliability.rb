@@ -160,8 +160,8 @@ module Kamigo
         Outbox.where(state: "pending", stream_head: true).order(:id).limit(limit).pluck(:id)
       end
 
-      def initialize(adapter_resolver:)
-        @adapter_resolver = adapter_resolver
+      def initialize(adapter_resolver:, acknowledger: nil)
+        @adapter_resolver, @acknowledger = adapter_resolver, acknowledger
       end
       def call(id)
         row = Outbox.find_by(id: id)
@@ -183,12 +183,45 @@ module Kamigo
         return claim unless claim == :claimed
         begin
           adapter = @adapter_resolver.call(row.platform, row.connection)
-          adapter.deliver(conversation_id: row.conversation_id, messages: row.messages.map { |message| message.deep_symbolize_keys }, **row.delivery_options.deep_symbolize_keys)
+          messages = row.messages.map { |message| message.deep_symbolize_keys }
+          acknowledged_indexes = {}
+          result = adapter.deliver(conversation_id: row.conversation_id, messages: messages, **row.delivery_options.deep_symbolize_keys) do |acknowledgment|
+            acknowledge(row, messages, acknowledgment, acknowledged_indexes)
+          end
+          acknowledge(row, messages, { message_indexes: (0...messages.length).to_a, provider_receipt: result }, acknowledged_indexes)
           Outbox.finalize_delivery!(row.id, state: "sent") ? :sent : :uncertain
         rescue StandardError
           Outbox.finalize_delivery!(row.id, state: "uncertain")
           raise
         end
+      end
+
+      private
+
+      # Adapters acknowledge only provider-confirmed messages. The fallback
+      # after a successful return keeps existing third-party adapters working.
+      # Duplicate acknowledgements are collapsed before invoking the host.
+      def acknowledge(row, messages, acknowledgment, acknowledged_indexes)
+        return unless @acknowledger
+        raise TypeError, "delivery acknowledgement must be a hash" unless acknowledgment.is_a?(Hash)
+        indexes = acknowledgment[:message_indexes] || acknowledgment["message_indexes"]
+        raise TypeError, "delivery acknowledgement indexes must be an array" unless indexes.is_a?(Array)
+        indexes = indexes.map do |index|
+          value = Integer(index)
+          raise IndexError, "delivery acknowledgement index is out of bounds" unless value.between?(0, messages.length - 1)
+          value
+        rescue ArgumentError, TypeError
+          raise TypeError, "delivery acknowledgement index must be an integer"
+        end
+        indexes = indexes.uniq.reject { |index| acknowledged_indexes[index] }
+        return if indexes.empty?
+        @acknowledger.call(
+          outbox_id: row.id, platform: row.platform, connection: row.connection,
+          conversation_id: row.conversation_id, messages: indexes.map { |index| messages.fetch(index) },
+          message_indexes: indexes,
+          provider_receipt: acknowledgment[:provider_receipt] || acknowledgment["provider_receipt"]
+        )
+        indexes.each { |index| acknowledged_indexes[index] = true }
       end
     end
   end

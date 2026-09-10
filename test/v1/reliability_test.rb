@@ -84,6 +84,63 @@ class ReliabilityTest < Minitest::Test
     assert_equal [{ type: 'text', text: 'hello' }], sent.first[:messages]
   end
 
+  def test_successful_legacy_adapter_falls_back_to_one_complete_acknowledgement
+    row = Kamigo::Reliability::Outbox.enqueue!(platform: 'line', connection: 'main', conversation_id: 'group',
+      messages: [{ type: 'text', text: 'one' }, { type: 'text', text: 'two' }])
+    adapter = Object.new
+    adapter.define_singleton_method(:deliver) { |**| { status: 200, request_id: 'request-1' } }
+    acknowledgements = []
+    delivery = Kamigo::Reliability::Delivery.new(
+      adapter_resolver: ->(*) { adapter }, acknowledger: ->(**attributes) { acknowledgements << attributes }
+    )
+
+    assert_equal :sent, delivery.call(row.id)
+    assert_equal :not_pending, delivery.call(row.id)
+    assert_equal 1, acknowledgements.length
+    assert_equal [0, 1], acknowledgements.first[:message_indexes]
+    assert_equal ['one', 'two'], acknowledgements.first[:messages].map { |message| message[:text] }
+    assert_equal row.id, acknowledgements.first[:outbox_id]
+  end
+
+  def test_partial_acknowledgement_survives_later_message_failure_without_replay
+    row = Kamigo::Reliability::Outbox.enqueue!(platform: 'telegram', connection: 'main', conversation_id: '-20',
+      messages: [{ text: 'confirmed' }, { text: 'rejected' }])
+    adapter = Object.new
+    adapter.define_singleton_method(:deliver) do |**arguments, &acknowledged|
+      acknowledged.call(message_indexes: [0], provider_receipt: { message_id: 91 })
+      raise IOError, arguments.inspect
+    end
+    acknowledgements = []
+    delivery = Kamigo::Reliability::Delivery.new(
+      adapter_resolver: ->(*) { adapter }, acknowledger: ->(**attributes) { acknowledgements << attributes }
+    )
+
+    assert_raises(IOError) { delivery.call(row.id) }
+    assert_equal 'uncertain', row.reload.state
+    assert_equal [[0]], acknowledgements.map { |item| item[:message_indexes] }
+    assert_equal ['confirmed'], acknowledgements.first[:messages].map { |message| message[:text] }
+    assert_equal :not_pending, delivery.call(row.id)
+    assert_equal 1, acknowledgements.length
+  end
+
+  def test_duplicate_adapter_acknowledgements_are_collapsed_and_fallback_fills_only_missing_indexes
+    row = Kamigo::Reliability::Outbox.enqueue!(platform: 'telegram', connection: 'main', conversation_id: '-21',
+      messages: [{ text: 'first' }, { text: 'second' }])
+    adapter = Object.new
+    adapter.define_singleton_method(:deliver) do |**_, &acknowledged|
+      2.times { acknowledged.call(message_indexes: [0], provider_receipt: { message_id: 92 }) }
+      { status: 200 }
+    end
+    acknowledgements = []
+    delivery = Kamigo::Reliability::Delivery.new(
+      adapter_resolver: ->(*) { adapter }, acknowledger: ->(**attributes) { acknowledgements << attributes }
+    )
+
+    assert_equal :sent, delivery.call(row.id)
+    assert_equal [[0], [1]], acknowledgements.map { |item| item[:message_indexes] }
+    assert_equal ['first', 'second'], acknowledgements.flat_map { |item| item[:messages] }.map { |message| message[:text] }
+  end
+
   def test_unknown_network_outcome_is_not_automatically_replayed
     row = new_outbox
     attempts = 0
