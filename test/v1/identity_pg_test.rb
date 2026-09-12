@@ -10,6 +10,7 @@ require_relative '../../db/migrate/20260909000001_create_kamigo_identity'
 
 class IdentityPostgresTest < Minitest::Test
   def setup
+    @original_connection_config = ActiveRecord::Base.connection_db_config.configuration_hash.dup
     @directory = Dir.mktmpdir('kamigo-identity-', '/tmp')
     @bin = ENV.fetch('PG_BIN', '/opt/homebrew/opt/postgresql@15/bin')
     @env = ENV.keys.grep(/^PG/).to_h { |key| [key, nil] }
@@ -23,9 +24,10 @@ class IdentityPostgresTest < Minitest::Test
   end
 
   def teardown
-    ActiveRecord::Base.connection_pool.disconnect!
+    ActiveRecord::Base.connection_pool.disconnect! if ActiveRecord::Base.connected?
     run_pg('pg_ctl', '-D', "#{@directory}/data", '-m', 'fast', '-w', 'stop') if @started
     FileUtils.remove_entry(@directory) if @directory && File.exist?(@directory)
+    ActiveRecord::Base.establish_connection(@original_connection_config) if @original_connection_config
   end
 
   def test_competing_principals_can_never_both_claim_account
