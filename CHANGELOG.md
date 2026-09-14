@@ -1,5 +1,10 @@
 # 修改記錄
 
+## 1.0.1 (2026-09-15)
+
+- 新增 host-owned connection resolver，讓同一平台的多個帳號各自驗證與發送訊息。
+- 將 bot connection 與 provider identity scope 分開，避免多 channel 身份誤綁。
+
 ## [0.20.0](https://github.com/etrex/kamigo/tree/0.20.0) (2021-04-04)
 [完整修改記錄](https://github.com/etrex/kamigo/compare/0.19.0...0.20.0)
 

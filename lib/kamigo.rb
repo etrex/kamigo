@@ -2,6 +2,7 @@
 require "rails"
 require "kamigo/version"
 require "kamigo/event"
+require "kamigo/connections"
 require "kamigo/router"
 require "kamigo/dispatcher"
 require "kamigo/engine"

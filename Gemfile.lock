@@ -13,7 +13,7 @@ PATH
 PATH
   remote: .
   specs:
-    kamigo (1.0.0)
+    kamigo (1.0.1)
       json (>= 2.0, < 3)
       kamiflex (~> 1.0)
       kamiliff (~> 1.0)
