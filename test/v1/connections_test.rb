@@ -9,7 +9,8 @@ class ConnectionsTest < Minitest::Test
 
   def test_resolves_and_normalizes_a_connection_definition
     registry = Kamigo::Connections::Registry.new do |platform:, connection:|
-      {platform: platform, connection: connection, identity_scope: 'provider-1', adapter: Adapter.new}
+      {platform: platform, connection: connection, identity_scope: 'provider-1',
+       conversation_scope: 'conversation-family-1', adapter: Adapter.new}
     end
 
     definition = registry.resolve(platform: :line, connection: :primary)
@@ -17,7 +18,15 @@ class ConnectionsTest < Minitest::Test
     assert_equal 'line', definition.platform
     assert_equal 'primary', definition.connection
     assert_equal 'provider-1', definition.identity_scope
+    assert_equal 'conversation-family-1', definition.conversation_scope
     assert_kind_of Adapter, definition.adapter
+  end
+
+  def test_conversation_scope_defaults_to_connection
+    definition = Kamigo::Connections::Definition.new(platform: :line, connection: 'primary',
+      identity_scope: 'provider-1', adapter: Adapter.new)
+
+    assert_equal 'primary', definition.conversation_scope
   end
 
   def test_unknown_and_mismatched_connections_fail_closed
@@ -40,6 +49,10 @@ class ConnectionsTest < Minitest::Test
     end
     assert_raises(Kamigo::Connections::InvalidConnection) do
       Kamigo::Connections::Definition.new(platform: :line, connection: 'primary', identity_scope: 'provider-1', adapter: Object.new)
+    end
+    assert_raises(Kamigo::Connections::InvalidConnection) do
+      Kamigo::Connections::Definition.new(platform: :line, connection: 'primary', identity_scope: 'provider-1',
+        conversation_scope: '', adapter: Adapter.new)
     end
   end
 end

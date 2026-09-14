@@ -32,7 +32,7 @@ class MultiConnectionAcceptanceTest < Minitest::Test
       secret, token = secrets[connection]
       next unless platform == 'line' && secret
       transport = Kamigo::Platforms::HttpTransport.new(token: token, local_http_endpoint: origin)
-      {platform: platform, connection: connection, identity_scope: 'shared-provider',
+      {platform: platform, connection: connection, identity_scope: 'shared-provider', conversation_scope: 'shared-conversations',
        adapter: Kamigo::Platforms::Line.new(secret: secret, transport: transport)}
     end
     body = JSON.generate(events: [{webhookEventId: 'same-event', type: 'message',
@@ -43,6 +43,7 @@ class MultiConnectionAcceptanceTest < Minitest::Test
       signature = Base64.strict_encode64(OpenSSL::HMAC.digest('SHA256', "#{name}-secret", body))
       event = definition.adapter.events(body: body, headers: {'X-Line-Signature' => signature}, connection: name).first
       assert_equal name, event.connection
+      assert_equal 'shared-conversations', definition.conversation_scope
       definition
     end
     wrong_signature = Base64.strict_encode64(OpenSSL::HMAC.digest('SHA256', 'alpha-secret', body))
